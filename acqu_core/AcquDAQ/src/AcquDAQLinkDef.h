@@ -30,6 +30,7 @@
 #pragma link C++ class TDAQmodule+;
 #pragma link C++ class TVirtualModule+;
 #pragma link C++ class TEPICSmodule+;
+#pragma link C++ class TTRB3module+;
 #pragma link C++ class TDAQcontrol+;
 #pragma link C++ class TDAQstore+;
 //#pragma link C++ class TDAQsocket+;
@@ -38,6 +39,7 @@
 #pragma link C++ class TCAMACmodule+;
 //
 #pragma link C++ class TDAQ_V2718+;
+#pragma link C++ class TDAQ_TRB3+;
 #pragma link C++ class TDAQ_KPhI686+;
 #pragma link C++ class TDAQ_SY1527+;
 #pragma link C++ class TVME_CBD8210+;

@@ -44,6 +44,8 @@
 //		   Xd00 - Xdff     Glasgow
 //		   Xe00 - Xeff     Kinetic Systems
 //		   Xf00 - Xfff     Miscellaneous
+//
+//         3100            TRB3 Endpoint
 
 #ifndef __ModuleIndex_h__
 #define __ModuleIndex_h__
@@ -52,7 +54,7 @@
 enum { EID_Undef = -1 };
 
 // Controllers
-enum { ECAEN_V2718 = 0xf000, EKPH_I686, ECAEN_SY1527 };
+enum { ECAEN_V2718 = 0xf000, EKPH_I686, ECAEN_SY1527, ETRB3_Ctrl };
 
 // VMEbus
 enum { EVMEbus, ECBD_8210, EHSM_8170, EVIC_8250, ESLV_8250 };
@@ -95,6 +97,10 @@ enum { ELRS_1821 = 0x2100, ELRS_1800, ELRS_1875, ELRS_1872, ELRS_1885,
 enum { EPH_10C6 = 0x2200, EPH_10C2 };
 enum { ESTR_200 = 0x2600, ESTR_136 };
 enum { EFASTBUS = 0x2fff };
+
+// TRB3
+enum { ETRB3_Endpoint = 0x3100 };
+
 // The Buses
 enum { E_BusUndef, E_VMEbus, E_CAMAC, E_FASTBUS, E_I2C, E_PCI, E_RS232 };
 
@@ -177,6 +183,9 @@ const Map_t kExpModules[] = {
   // PCI
   {"Virtual",    EDAQ_Virtual},
   {"EPICS",      EDAQ_Epics},
+  // TRB3
+  {"TRB3_Ctrl",     ETRB3_Ctrl},
+  {"TRB3_Endpoint", ETRB3_Endpoint},
 };
 
 #endif
