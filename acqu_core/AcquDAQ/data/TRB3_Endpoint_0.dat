@@ -1,0 +1,7 @@
+##                *** AcquDAQ++ <-> Root ***
+## DAQ for Sub-Atomic Physics Experiments.
+##
+# enable debug output
+TRB3-Debug:
+##
+

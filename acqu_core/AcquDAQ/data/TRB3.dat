@@ -1,0 +1,25 @@
+##                *** AcquDAQ++ <-> Root ***
+## DAQ for Sub-Atomic Physics Experiments.
+##
+## Description of experiment...held in data header
+Description: Test of TRB3 integration
+## Data output specification
+##         Name			#Buff  #Rec	Rec-Len	Mode  Packet-Len  IP 
+#File-Name: /scratch/acqu/AcquDAQ 32	50000	32768	Disk  32768       3010
+File-Name: scratch/myAcquDAQFile 32	50000	1024	ENet  32768       3010
+##				Scaler	Slow-Ctrl
+Event-Counters:		100	0
+Start-Run: 0
+Control:  Local    0     0
+#Control:   ENet	    localhost 3020
+##
+Module:	TRB3_Ctrl	TRB3_Ctrl_0	TRB3_Ctrl_0.dat
+Module: TRB3_Endpoint	TRB3_Endpoint_0	TRB3_Endpoint_0.dat ADC 200 1 12 200
+Module: TRB3_Endpoint	TRB3_Endpoint_1	TRB3_Endpoint_0.dat ADC 300 1 12 201
+Module: TRB3_Endpoint	TRB3_Endpoint_2	TRB3_Endpoint_0.dat ADC 400 1 12 202
+Module: TRB3_Endpoint	TRB3_Endpoint_3	TRB3_Endpoint_0.dat ADC 500 1 12 203
+#
+IRQ-Ctrl: TRB3_Ctrl_0
+#
+#	End of File
+#

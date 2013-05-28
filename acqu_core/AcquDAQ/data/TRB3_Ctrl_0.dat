@@ -1,0 +1,9 @@
+##                *** AcquDAQ++ <-> Root ***
+## DAQ for Sub-Atomic Physics Experiments.
+#
+# enable debug output
+TRB3-Debug:
+# set the TRB address (in hex) of the CTS (needed to unpack the UDP data)
+TRB3-CtsAddr: 8000
+#	End of File
+#

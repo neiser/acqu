@@ -1,2 +1,5 @@
 # ignore log files
 *.log
+
+# scratch for testing
+/AcquDAQ/scratch/
