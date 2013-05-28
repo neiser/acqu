@@ -24,7 +24,7 @@ Initialise:
 ## from the other specified channels
 ## CB TDC's
 ##              #hits   start   stop    reference
-MultiADC:       1       200    200
+MultiADC:       2       200    215
 #MultiADC:       3       2001    2767    2000
 #
 # Full MWPC TDC configuration
@@ -80,9 +80,9 @@ MultiADC:       1       200    200
 #Save-Event:
 ##
 ## Histogram ALL defined single value ADC's
-Display: All
+#Display: All
 ## Histogram QDCs
-Display: ADC 200 200
+#Display: ADC 200 200
 #Display: ADC 1088 1183
 #Display: ADC 1280 1295
 ##
@@ -103,7 +103,8 @@ Display: ADC 200 200
 #Display: MultiHit 2008 2031 1000 -3500 -1500 0
 ##
 ## CB TDCs
-Display: MultiHit 200 200 3000 -100 1100 0
+Display: MultiHit 200 215 100  5000 7000 0
+Display: MultiHit 200 215 100  500 4500 1
 ##
 ## WC CATCH TDC's
 #

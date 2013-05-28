@@ -10,6 +10,8 @@
 
 class TDAQ_TRB3;
 #include "TTRB3module.h"
+#include "TTRB3TdcHit.h"
+#include "TTRB3TdcCalib.h"
 #include <map>
 
 #ifndef __CINT__
@@ -23,6 +25,7 @@ extern "C" {
 class TDAQ_TRB3 : public TDAQmodule
 {
 private:
+  Bool_t    fIsIRQEnabled;
   // debugging of TRB3 specific stuff enabled?
   Bool_t fTRB3debug;
   // socket handle to listen for incoming UDP packets from TRB3
@@ -32,29 +35,30 @@ private:
   std::vector<UInt_t> fPacket;
   // sets up the socket
   void InitSocket();
+  std::string fListenAddress;
+  UInt_t fListenPort;
   // stuff to handle the unpacking of the received UDP packet
+  std::map<UInt_t, TTRB3module*> fAddrEndpoints;
+  // the hub list is to be filled via config file
   std::vector<UInt_t> fAddrHubs;
+  // and the CTS address is also set by config file
   UInt_t fAddrCTS;
-  UInt_t fTdcHeaderRandomBits; // random code, generated individually for each event
-  UInt_t fTdcHeaderErrorBits; // TDC errors are indicated here (0 in case of no errors)
   Int_t fTdcLastChannelNo;
   UInt_t fTdcEpochCounter;
   UInt_t fCTSExtTrigger;
   UInt_t fCTSExtTriggerStatus;
+  Bool_t bUnpackingOkay;
   void DoUnpacking();
   Bool_t CheckHubAddress(const UInt_t& nTrbAddress);
-  Bool_t CheckTdcAddress(const UInt_t& nTrbAddress);
-  Bool_t DecodeTdcHeader(UInt_t& DataWord);
-  Bool_t DecodeTdcWord(UInt_t& DataWord, UInt_t& nUserTdcAddress);
+  TTRB3module* CheckTdcAddress(const UInt_t& nTrbAddress);
+  Bool_t DecodeTdcHeader(TTRB3module* currMod, UInt_t& DataWord);
+  Bool_t DecodeTdcWord(TTRB3module* currMod, UInt_t& DataWord);
   UInt_t DecodeCTSData(unsigned i0);
   // stuff to handle calibration and event reconstruction from the unpacked data
-  Double_t fCTSExtTriggerTime;    // the time reconstructed
-
+  TTRB3TdcHit fCTSRefHit;    // reference TDC hit from CTS
+  TTRB3TdcCalib fTdcCalib;   // calibration information
 protected:
-  Bool_t    fIsIRQEnabled;
-  // fAddrEndpoints is protected so that TTRB3module
-  // can add itself to this list
-  std::map<UInt_t, TTRB3module*> fAddrEndpoints;
+
 public:
   friend class TTRB3module;
   TDAQ_TRB3( Char_t*, Char_t*, FILE*, Char_t* );

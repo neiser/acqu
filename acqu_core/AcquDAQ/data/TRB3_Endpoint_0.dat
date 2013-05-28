@@ -1,7 +1,18 @@
 ##                *** AcquDAQ++ <-> Root ***
 ## DAQ for Sub-Atomic Physics Experiments.
 ##
-# enable debug output
-TRB3-Debug:
-##
 
+# enable debug output
+#TRB3-Debug:
+
+# TDC Calibration
+# specify the startbin and endbin of the
+# fine time TDC histogram which should
+# correspond to clock cycle length in nanosecond
+# (here: 5ns=200MHz FPGA clock)
+# commented out so that calibration from controller is used
+# start-bin end-bin clockcycle
+#TRB3-TdcCalib: 30 495 5
+
+#	End of File
+#

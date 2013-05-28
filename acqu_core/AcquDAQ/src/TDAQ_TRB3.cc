@@ -13,10 +13,12 @@ using namespace std;
 
 ClassImp(TDAQ_TRB3)
 
-enum { ETRB3_Debug=100, ETRB3_CtsAddr };
+enum { ETRB3_Debug=100, ETRB3_SocketListen, ETRB3_CtsAddr, ETRB3_TdcCalib};
 static Map_t kTRB3Keys[] = {
   {"TRB3-Debug:", ETRB3_Debug},
+  {"TRB3-SocketListen:", ETRB3_SocketListen},
   {"TRB3-CtsAddr:", ETRB3_CtsAddr},
+  {"TRB3-TdcCalib:", ETRB3_TdcCalib},
   {NULL,           -1}
 };
 
@@ -26,14 +28,20 @@ static Map_t kTRB3Keys[] = {
 TDAQ_TRB3::TDAQ_TRB3( Char_t* name, Char_t* file, FILE* log, Char_t* line ):
   TDAQmodule( name, file, log ),
   fTRB3debug(kFALSE),
-  fPacket(fPacketMaxSize/sizeof(UInt_t),'0'),
+  fPacket(),
+  fListenAddress("192.168.1.1"),
+  fListenPort(50000),
+  fAddrEndpoints(),
   fAddrHubs(),
   fAddrCTS(0xffff),
-  fAddrEndpoints()
+  bUnpackingOkay(kFALSE),
+  fCTSRefHit(),
+  fTdcCalib()
 {
   // Basic initialisation
   fCtrl = new TDAQcontrol(this);
   fType = EDAQ_Ctrl;                         // controller board (has slaves)
+  fPacket.reserve(fPacketMaxSize/4);
   AddCmdList( kTRB3Keys );                  // TRB3-specific cmds
 }
 
@@ -47,11 +55,14 @@ TDAQ_TRB3::~TDAQ_TRB3( )
 //-----------------------------------------------------------------------------
 void TDAQ_TRB3::InitSocket()
 {
+  if(fTRB3debug)
+    cout << "Init Socket binding to " << fListenAddress << ":" << fListenPort << endl;
+
   fSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
   if (fSocket==-1)
     PrintError("TDAQ_TRB3","socket()",EErrFatal);
   else if(fTRB3debug)
-    printf("TDAQ_TRB3: socket() successful\n");
+    cout << "TDAQ_TRB3: socket() successful" << endl;
 
   // don't know if increasing the UDP receive buffer is really necessary
   // especially newer kernels have a really smart autotuning feature for this...
@@ -62,13 +73,13 @@ void TDAQ_TRB3::InitSocket()
   struct sockaddr_in my_addr;
   bzero(&my_addr, sizeof(my_addr));
   my_addr.sin_family = AF_INET;
-  my_addr.sin_port = htons(50000);
-  inet_pton(my_addr.sin_family, "192.168.1.1", &(my_addr.sin_addr));
+  my_addr.sin_port = htons(fListenPort);
+  inet_pton(my_addr.sin_family, fListenAddress.c_str(), &(my_addr.sin_addr));
 
   if (bind(fSocket, (struct sockaddr* ) &my_addr, sizeof(my_addr))==-1)
     PrintError("TDAQ_TRB3","bind()",EErrFatal);
   else if(fTRB3debug)
-    printf("TDAQ_TRB3: bind() successful\n");
+    cout << "TDAQ_TRB3: bind() successful" << endl;
 }
 
 //-----------------------------------------------------------------------------
@@ -81,10 +92,24 @@ void TDAQ_TRB3::SetConfig( Char_t* line, Int_t key )
     fTRB3debug = kTRUE;
     break;
 
+  case ETRB3_SocketListen:
+    // override the default listen IP and port
+    if(sscanf(line,"%s%d", fListenAddress.c_str(), &fListenPort) != 2)
+      PrintError(line, "<TDAQ_TRB3 SocketListen setup line parse>", EErrFatal);
+    break;
+
+
   case ETRB3_CtsAddr:
     // get the CTS address (needed for unpacking the UDP packet)
     if(sscanf(line,"%x", &fAddrCTS) != 1)
       PrintError(line, "<TDAQ_TRB3 CtsAddr setup line parse>", EErrFatal);
+    break;
+
+  case ETRB3_TdcCalib:
+    if(sscanf(line,"%lf%lf%lf", &fTdcCalib.StartBin,
+              &fTdcCalib.EndBin, &fTdcCalib.ClockCycle) != 3)
+      PrintError(line, "<TDAQ_TRB3 TdcCalib setup line parse>", EErrFatal);
+    fTdcCalib.IsValid = kTRUE;
     break;
 
   default:
@@ -112,9 +137,11 @@ void TDAQ_TRB3::WaitIRQ( )
 {
   for(;;) {
     if(fIsIRQEnabled) {      // "interrupt" enabled?
+      // ensure that there's enough space for the UDP packet
+      fPacket.resize(fPacketMaxSize/sizeof(UInt_t));
+      // recvfrom expects a pointer to where it should store the data
       struct sockaddr_in cli_addr;
       socklen_t slen=sizeof(cli_addr);
-      // recvfrom expects a pointer to where it should store the data
       Int_t recvBytes = recvfrom(fSocket, &(fPacket)[0], fPacketMaxSize, 0,
                                  (struct sockaddr*)&cli_addr, &slen);
       if(recvBytes==-1)
@@ -125,7 +152,8 @@ void TDAQ_TRB3::WaitIRQ( )
         PrintError("TDAQ_TRB3","recvfrom(): #Bytes not multiple of UInt_t size",EErrNonFatal);
         recvBytes += sizeof(UInt_t)-rem;
       }
-      fPacket.resize(recvBytes/4);
+      // resize to the actual number of received content
+      fPacket.resize(recvBytes/sizeof(UInt_t));
 
       // transform from network byte order to host byte order
       transform(fPacket.begin(),fPacket.end(),fPacket.begin(),ntohl);
@@ -144,6 +172,23 @@ void TDAQ_TRB3::WaitIRQ( )
       DoUnpacking();
       break;
     } else {
+      // we empty the socket input buffer by some non-blocking reads
+      // this hopefully ensures that after the IRQ is enabled the first UDP packet received
+      // corresponds to the first valid trigger (and not to some leftover events from previous runs)
+      // TODO: Check that there is some delay before fIsIRQEnabled and the first readout...
+      Int_t recvBytes = -1;
+      do {
+        char dump_buf[512];
+        struct sockaddr_in cli_addr;
+        socklen_t slen=sizeof(cli_addr);
+        recvBytes = recvfrom(fSocket, dump_buf, sizeof(dump_buf), MSG_DONTWAIT,
+                                   (struct sockaddr*)&cli_addr, &slen);
+        // this output can be very annoying
+        if(fTRB3debug)
+          cout << "Cleared " << recvBytes << " from input buffer" << endl;
+      }
+      while(recvBytes>0);
+      // don't poll the socket too often
       sleep(1);
     }
   }
@@ -164,7 +209,14 @@ void TDAQ_TRB3::DoUnpacking()
    *
    * If the comments or variable names refer to "TDC", the implementation of
    * a TDC in the FPGAs of the TRB3 are meant!
+   *
+   * It is also extended such that the "raw" TDC data is converted to
+   * hits with timestamp relative to CTS timestamp and
+   * time over threshold information (=charge information)
+   *
    */
+
+  bUnpackingOkay = kFALSE;
 
   // state machine for TDC data decoding needed
   UInt_t nTrbAddress	= 0;
@@ -172,14 +224,31 @@ void TDAQ_TRB3::DoUnpacking()
   UInt_t nTdcAddress	= 0;
   size_t nTdcWords	= 0;
   Bool_t bFoundCtsPacket = kFALSE;
+  TTRB3module* fCurrentMod = NULL;
+
+  // the first word contains the payload length in number of bytes
+  size_t nPayloadLength = fPacket[0];
+  if(nPayloadLength == 0 || nPayloadLength % 4 != 0) {
+    if(fTRB3debug)
+      cout << "Length of UDP packet " << dec << nPayloadLength <<
+              " not multiple of 4 or is zero" << endl;
+    return;
+  }
+  // convert to number of TRB words (4bytes each)
+  nPayloadLength /= 4;
+
+  if(fTRB3debug) {
+    cout << "Expected Payload Length: " << dec << nPayloadLength << endl <<
+            "Received Payload Length: " << fPacket.size() << endl;
+  }
 
   // declare i outside loop to check in the end
   // if we processed everything correctly
-  vector<UInt_t>::size_type i=0;
+  size_t i=0;
   // the "real" trb data words start after 6 HLD header words
-  // and are appended by 11 HLD trailing words
-  for(i=6;i<fPacket.size()-11;i++){ // loop over all TRB data and decode TDC hits
+  // and are appended by 3 HLD trailing words
 
+  for(i=6;i<nPayloadLength-3;i++){ // loop over all TRB data and decode TDC hits
     UInt_t CurrentDataWord = fPacket[i];
     if(fTRB3debug)
       cout << "i=" <<i<<" Data: "<<setfill('0') << setw(8)<<hex<<CurrentDataWord<<dec<<endl;
@@ -195,8 +264,7 @@ void TDAQ_TRB3::DoUnpacking()
         if(fTRB3debug)
           cout << "Found CTS readout packet, decoding it (" << nTrbWords << " words)" << endl;
 
-        // the CTS address is also mentioned in the TDC list,
-        // so we expect to find some TDC information
+        // we expect to find some TDC information
         // we also save the external trigger id (if we find one)
         UInt_t nCTSwords = DecodeCTSData(i+1);
 
@@ -214,6 +282,7 @@ void TDAQ_TRB3::DoUnpacking()
           nTdcWords = nTrbWords-nCTSwords;
           nTrbWords = nTdcWords;
           nTdcAddress = nTrbAddress;
+          fCurrentMod = NULL; // clear the current module, this indicates CTS for DecodeTdcWord
           if(fTRB3debug)
             cout << "TDC in CTS Endpoint found at 0x" << setfill('0') << setw(4)
                  << hex << nTdcAddress << dec << ", Payload " << nTdcWords << endl;
@@ -235,29 +304,39 @@ void TDAQ_TRB3::DoUnpacking()
                << hex << nTrbAddress << dec << ", Subsubevent size " << nTrbWords << endl;
 
       }
-      else if(CheckTdcAddress(nTrbAddress)) {
-        // we recognized it as an TDC endpoint
-        nTdcWords	= nTrbWords;
-        nTdcAddress = nTrbAddress;
-        if(fTRB3debug)
-          cout << "TDC Endpoint found at 0x" << setfill('0') << setw(4)
-               << hex << nTdcAddress << dec << ", Payload " << nTdcWords << endl;
-      }
-      else {
-        // this doesn't seem to be interesting data, so skip it
-        if(fTRB3debug)
-          cout << "Found uninteresting data at 0x" << setfill('0') << setw(4)
-               << hex << nTrbAddress << dec << " (not HUB, not TDC, not CTS), skipping it ("  << nTrbWords << " words)" << endl;
-        i += nTrbWords;
-        continue;
+      else  {
+        fCurrentMod = CheckTdcAddress(nTrbAddress);
+        if(fCurrentMod != NULL) {
+          // we recognized it as an TDC endpoint
+          nTdcWords	= nTrbWords;
+          nTdcAddress = nTrbAddress;
+          if(fTRB3debug)
+            cout << "TDC Endpoint found at 0x" << setfill('0') << setw(4)
+                 << hex << nTdcAddress << dec << ", Payload " << nTdcWords << endl;
+        }
+        else {
+          // this doesn't seem to be interesting data, so skip it
+          if(fTRB3debug)
+            cout << "Found uninteresting data at 0x" << setfill('0') << setw(4)
+                 << hex << nTrbAddress << dec << " (not HUB, not TDC, not CTS), skipping it ("  << nTrbWords << " words)" << endl;
+          i += nTrbWords;
+          continue;
+        }
+
       }
 
     }
     else if(nTdcWords==nTrbWords) {
       // At beginning, we expect a TDC Header
-      if(!DecodeTdcHeader(CurrentDataWord)) {
-        cerr << "ERROR in UDP Packet: TDC Header "
-             << CurrentDataWord << dec << " invalid, skipping payload ("<< nTdcWords << " words)" << endl;
+      if(!DecodeTdcHeader(fCurrentMod, CurrentDataWord)) {
+        if(fTRB3debug)
+           cout << "ERROR in UDP Packet: TDC Header "
+                << CurrentDataWord << dec << " invalid, skipping payload ("<< nTdcWords << " words)" << endl;
+        // error flag for module already set in DecodeTdcHeader,
+        // but we give up if there's an error in the CTS TDC Header
+        if(fCurrentMod==NULL)
+         return;
+
         i += nTdcWords-1;
         nTdcWords = 0;
         continue;
@@ -266,7 +345,7 @@ void TDAQ_TRB3::DoUnpacking()
       nTdcWords--;
     }
     else {
-      DecodeTdcWord(CurrentDataWord, nTdcAddress);
+      DecodeTdcWord(fCurrentMod, CurrentDataWord);
       nTdcWords--;
       if(nTdcWords==0) {
         if(fTRB3debug)
@@ -276,47 +355,58 @@ void TDAQ_TRB3::DoUnpacking()
 
   } // end of loop over all TRB data
 
-
-
-  if(i != fPacket.size()-11) {
-    cerr << "ERROR in UDP Packet: Skipped too many words " << endl;
+  if(i != nPayloadLength-3) {
+    if(fTRB3debug)
+      cout << "ERROR in UDP Packet: Skipped too many words " << endl;
+    return;
   }
 
   if(!bFoundCtsPacket) {
-    cerr << "ERROR in UDP Packet: No CTS packet found " << endl;
+    if(fTRB3debug)
+       cout << "ERROR in UDP Packet: No CTS packet found" << endl;
+    return;
   }
 
+  bUnpackingOkay = kTRUE;
 }
 
 Bool_t TDAQ_TRB3::CheckHubAddress(const UInt_t& nTrbAddress) {
   return find(fAddrHubs.begin(),fAddrHubs.end(),nTrbAddress) != fAddrHubs.end();
 }
 
-Bool_t TDAQ_TRB3::CheckTdcAddress(const UInt_t& nTrbAddress) {
-  return fAddrEndpoints.find(nTrbAddress) != fAddrEndpoints.end();
+TTRB3module* TDAQ_TRB3::CheckTdcAddress(const UInt_t& nTrbAddress) {
+  map<UInt_t, TTRB3module*>::iterator item = fAddrEndpoints.find(nTrbAddress);
+  if(item != fAddrEndpoints.end())
+    return item->second;
+  else
+    return NULL;
 }
 
 #define TDC_HEADER_MARKER  0b001 // |MH> binary definitions work with gcc but not with VC++
 #define TDC_EPOCH_MARKER   0b011
 #define TDC_DEBUG_MARKER   0b010
 
-Bool_t TDAQ_TRB3::DecodeTdcHeader(UInt_t& DataWord) {
-
+Bool_t TDAQ_TRB3::DecodeTdcHeader(TTRB3module* currMod, UInt_t& DataWord) {
+  UInt_t fTRBError = 0;
   if(((DataWord>>29) & 0x7) != TDC_HEADER_MARKER) { // check 3 bits reserved for TDC header marker
-    return (kFALSE);
+    fTRBError = 1 << 16;
   }
-  fTdcHeaderRandomBits	= (DataWord>>16) & 0xFF;
-  fTdcHeaderErrorBits	= DataWord & 0xFFFF;
-  fTdcLastChannelNo = -1; // reset the last channel number...
+  fTRBError = (fTRBError & 0xFFFF0000) | (DataWord & 0xFFFF);
+  if(fTRBError != 0) {
+    if(currMod != NULL)
+      currMod->fTRBError = fTRBError;
+    return kFALSE;
+  }
+  fTdcLastChannelNo = -1; // reset the last channel number at the beginning
   if(fTRB3debug){
+    UInt_t fTdcHeaderRandomBits	= (DataWord>>16) & 0xFF;
     cout << "TDC Header word found!" << endl;
-    cout << "TDC Error Code is " << hex << fTdcHeaderErrorBits << dec << endl;
     cout << "TDC Random Bits " << hex << fTdcHeaderRandomBits << dec << endl;
   }
-  return (kTRUE);
+  return kTRUE;
 }
 
-Bool_t TDAQ_TRB3::DecodeTdcWord(UInt_t& DataWord, UInt_t& nUserTdcAddress) { // decode TDC data word
+Bool_t TDAQ_TRB3::DecodeTdcWord(TTRB3module* currMod, UInt_t& DataWord) { // decode TDC data word
 
   // first check if word is EPOCH or DEBUG
   UInt_t FirstThreeBits =  (DataWord>>29) & 0x7;
@@ -324,7 +414,7 @@ Bool_t TDAQ_TRB3::DecodeTdcWord(UInt_t& DataWord, UInt_t& nUserTdcAddress) { // 
   // put the EPOCH number into the SubEvent's member
   if(FirstThreeBits == TDC_EPOCH_MARKER) {
     if(fTRB3debug)
-      cout << "Found EPOCH word:  " << hex << DataWord << ", " << nUserTdcAddress << dec << endl;
+      cout << "Found EPOCH word:  " << hex << DataWord << dec << endl;
     // lowest 28bits represent epoch counter
     fTdcEpochCounter = DataWord & 0x0FFFFFFF;
     // this indicates that we found an EPOCH counter
@@ -335,15 +425,14 @@ Bool_t TDAQ_TRB3::DecodeTdcWord(UInt_t& DataWord, UInt_t& nUserTdcAddress) { // 
   // check for DEBUG, we don't use this info at the moment
   if(FirstThreeBits == TDC_DEBUG_MARKER) {
     if(fTRB3debug)
-      cout << "Found DEBUG word:  " << hex << DataWord << ", " << nUserTdcAddress << dec << endl;
+      cout << "Found DEBUG word:  " << hex << DataWord << dec << endl;
     return kFALSE;
   }
 
   // now we expect a TIMEDATA word...if not, we don't know :)
   if((DataWord>>31) != 1) { // check time data marker i.e. MSB==1
     if(fTRB3debug)
-      cout << "Found ??UNKNOWN?? word (maybe spurious header): " << hex << DataWord << ", "
-           << nUserTdcAddress << dec  << endl;
+      cout << "Found ??UNKNOWN?? word (maybe spurious header): " << hex << DataWord << dec  << endl;
     return kFALSE;
   }
 
@@ -355,14 +444,42 @@ Bool_t TDAQ_TRB3::DecodeTdcWord(UInt_t& DataWord, UInt_t& nUserTdcAddress) { // 
     fTdcEpochCounter = 0;
   }
 
-  Bool_t bIsRefChannel	= (nTdcChannelNo==0 || nUserTdcAddress==fAddrCTS) ? kTRUE : kFALSE;
-  UInt_t nTdcFineTime		= (DataWord>>12) & 0x3FF; // TDC fine time is represented by 10 bits
-  UInt_t nTdcEdge			= (DataWord>>11) & 0x1; // TDC edge indicator: 1->rising edge, 0->falling edge
-  UInt_t nTdcCoarseTime	= DataWord & 0x7FF; // TDC coarse time is represented by 11 bits
-
   if(fTRB3debug)
     cout << "Found TIMEDATA word:  " <<hex << DataWord << dec << ", channel " << nTdcChannelNo
          << " Epoch:" << fTdcEpochCounter  << " last: " << fTdcLastChannelNo << endl;
+
+  // save the hit data in storage class
+  TTRB3TdcHit fHit;
+  fHit.Channel = nTdcChannelNo;
+  fHit.FineTime		= (DataWord>>12) & 0x3FF; // TDC fine time is represented by 10 bits
+  fHit.IsRisingEdge	= ((DataWord>>11) & 0x1) == 1; // TDC edge indicator: 1->rising edge, 0->falling edge
+  fHit.CoarseTime	= DataWord & 0x7FF; // TDC coarse time is represented by 11 bits
+  fHit.EpochCounter = fTdcEpochCounter; // was set by previous TDC word
+
+  // decide where to put that hit...
+  if(currMod == NULL) {
+    // we decode a TDC word inside a CTS (no endpoint module available)
+    if(fTRB3debug)
+      cout << "Found reference hit from CTS..." << endl;
+    // only store reference hit if it has the right channel number
+    if(nTdcChannelNo==2)
+      fCTSRefHit = fHit;
+    else if(fTRB3debug)
+      cout << "But has the wrong channel number" << endl;
+  }
+  else if(nTdcChannelNo==0) {
+    // is reference channel, so save it in extra field
+    if(fTRB3debug)
+      cout << "Found reference hit for module " << hex << currMod->fTRBAddress << dec << endl;
+    currMod->fRefHit = fHit;
+  }
+  else {
+    // is conventional one, insert it
+    if(fTRB3debug)
+      cout << "Adding hit to module " << hex << currMod->fTRBAddress << dec << endl;
+    currMod->fTdcHits.push_back(fHit);
+  }
+
   fTdcLastChannelNo = (Int_t)nTdcChannelNo;
   return kTRUE;
 }

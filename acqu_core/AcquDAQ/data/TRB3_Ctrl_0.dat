@@ -1,9 +1,23 @@
 ##                *** AcquDAQ++ <-> Root ***
 ## DAQ for Sub-Atomic Physics Experiments.
 #
+
 # enable debug output
-TRB3-Debug:
+#TRB3-Debug:
+
+# change the default IP address and port on which to listen for UPD packets
+#TRB3-SocketListen: 192.168.1.1 50000
+
 # set the TRB address (in hex) of the CTS (needed to unpack the UDP data)
 TRB3-CtsAddr: 8000
+
+# TDC Calibration
+# specify the startbin and endbin of the
+# fine time TDC histogram which should
+# correspond to clock cycle length in nanosecond
+# (here: 5ns=200MHz FPGA clock)
+# start-bin end-bin clockcycle
+TRB3-TdcCalib: 30.0 495.0 5.0
+
 #	End of File
 #
