@@ -1,0 +1,361 @@
+##----------------------------------------------------------------------------
+##                      Acqu++
+##              Data Acquisition and Analysis
+##                      for
+##              Nuclear Physics Experiments
+##
+##              C/C++ UNIX-Based DAQ
+##              supported on PPC/lynxos, PC/linux
+##              Preferred compiler g++
+##
+##                  *** GeSiCA.d ***
+##--Description
+##      Parameter data file
+##      Specify setup files and other stuff for GeSiCA/SADC setup
+##
+##--Author      JRM Annand      24th Oct 2002
+##--Update      JRM Annand
+##--Update 	D. Krambrich	09th Oct 2003
+##--Update	D. Krambrich	16th Feb 2004
+##                 Set sums to 30 samples
+##              S.St., D.K.     12.  Mar 2004
+##                 Set threshold to 15
+##--Update      JRM Annand	27th Apr 2004 Reduce latency, TCS trig retimed
+##--Update      JRM Annand	 1st May 2004 Reduce latency, TCS trig retimed
+##--Update      D. Krambrich     1st Sep 2004 Add 2- and 3-sum firmware.
+##--Update      E. J. Downie    26th Jan 2010 Altered Latency
+##--Update      E. J. Downie     19th Feb 2010 Altered Latency after cable change
+##--Update      B. Oussena       30th Mar 2012 added CatchMapSize
+##
+##--------------------------------------------------------------------------
+# Memory mapping for VMEbus controller
+CatchMapSize: 1000
+
+*
+* You have to set this parameter first!
+*
+NADCBoards:	6
+*
+* Code file for IMUX (GeSiCA) FPGA
+* "Cold start" only
+GeSiCAFile: ./data/FPGA/hgsca6_3.rbt
+*
+* Code file for SADC FPGA
+* "Cold start" only
+* Firmware for "normal" 3-sum readout:    (AcquMode 3)
+SADCFile:   ./data/FPGA/i_adc_mainz_100.rbt
+* Firmware for 2-sum readout:             (AcquMode 7)
+*SADCFile:     ./data/FPGA/i_adc_mainz_102_sum01.rbt
+* Firmware for 1-sum readout:             (AcquMode 6)
+*SADCFile:     ./data/FPGA/i_adc_mainz_102_diff10.rbt
+*
+* Configuration of readout mode
+* Mode = 0 no data suppression, samples & 3 sums read
+* Latch readout works up to 84 samples, but workstation crashes at
+* more than 24 samples from 7 boards.
+* Mode = 1 sparsified data, 3 sums read for channels over threshold
+* Latency delay on incoming ADC signal (in number of clock samples)
+* Nsamples is the number of samples to read
+* AcquMode:
+* ESG_SINGLE 1 (Save pedestal subtracted signal only)
+* ESG_TRIPLE 3 (Save the 3 sums calculated by the SG-ADC)
+* ESG_SAMPLE 4 (Save the flash-ADC samples)
+* ESG_ALL    5 (Save the samples + 3 sum outputs)
+* ESG_SUM_1  6 (ADC delivers only one sum. Save it.)
+* ESG_SUM_01 7 (ADC delivers sum 0 and sum 1. Save them.
+*
+*		Mode	Latency		Nsamples	AcquMode
+*GeSiCAMode:	0	72		90		5
+*GeSiCAMode:	1	72		90		3
+* Reduce latency to by 8 to compensate for TCS trigger coming 212ns earlier
+* Reduce latency to by 10 to compensate for TCS trigger coming 250ns earlier
+*GeSiCAMode:	1	64		90		3
+*GeSiCAMode:	1	62		90		3
+* Increase latency by 22 to compensate for trigger coming 550ns later - EJD  07.02.10
+GeSiCAMode:	1	69		90		3
+* Testing the new firmware-versions
+*GeSiCAMode:	1	62		90		6
+*
+* Integration of samples...
+* start sample channel and #sample channels to add for
+* Sum-0 pedestal region
+* Sum-1 signal region
+* Sum-2 tail region
+*		start0	nchan0	start1	nchan1	start2	nchan2
+*SADCSum:        10	20	34	20	60	20
+SADCSum:        0	30	30	30	60	30
+*
+*
+* Thresholds for SADC data suppression
+* in "sum only mode" channel [i] gets suppressed
+* if Sum-1 - Sum-0 < Threshold.
+* Command-line syntax:
+* SADC is the GeSiCA fibre-optic port (1-8) connected to the SADC
+* Chan is the SADC channel (1-32)
+* Thresh is the Threshold
+*
+*		 SADC  Chan    Thresh
+SADCThreshold:	 0	 0	15
+SADCThreshold:	 0	 1	15
+SADCThreshold:	 0	 2	15
+SADCThreshold:	 0 	 3	15
+SADCThreshold:	 0	 4	15
+SADCThreshold:	 0	 5	15
+SADCThreshold:	 0	 6	15
+SADCThreshold:	 0	 7	15
+SADCThreshold:	 0	 8	15
+SADCThreshold:	 0	 9	15
+SADCThreshold:	 0	10	15
+SADCThreshold:	 0	11	15
+SADCThreshold:	 0	12	15
+SADCThreshold:	 0	13	15
+SADCThreshold:	 0	14	15
+SADCThreshold:	 0	15	15
+SADCThreshold:	 0	16	15
+SADCThreshold:	 0	17	15
+SADCThreshold:	 0 	18	15
+SADCThreshold:	 0	19	15
+SADCThreshold:	 0	20      15
+SADCThreshold:	 0	21	15
+SADCThreshold:	 0	22	15
+SADCThreshold:	 0	23	15
+SADCThreshold:	 0	24	15
+SADCThreshold:	 0	25	15
+SADCThreshold:	 0	26	15
+SADCThreshold:	 0	27	15
+SADCThreshold:	 0	28	15
+SADCThreshold:	 0	29	15
+SADCThreshold:	 0	30	15
+SADCThreshold:	 0	31	15
+*
+SADCThreshold:	 1	 0	15
+SADCThreshold:	 1	 1	15
+SADCThreshold:	 1	 2	15
+SADCThreshold:	 1 	 3	15
+SADCThreshold:	 1	 4	15
+SADCThreshold:	 1	 5	15
+SADCThreshold:	 1	 6	15
+SADCThreshold:	 1	 7	15
+SADCThreshold:	 1	 8	15
+SADCThreshold:	 1	 9	15
+SADCThreshold:	 1	10	15
+SADCThreshold:	 1	11	15
+SADCThreshold:	 1	12	15
+SADCThreshold:	 1	13	15
+SADCThreshold:	 1	14	15
+SADCThreshold:	 1	15	15
+SADCThreshold:	 1	16	15
+SADCThreshold:	 1	17	15
+SADCThreshold:	 1 	18	15
+SADCThreshold:	 1	19	15
+SADCThreshold:	 1	20	15
+SADCThreshold:	 1	21	15
+SADCThreshold:	 1	22	15
+SADCThreshold:	 1	23	15
+SADCThreshold:	 1	24	15
+SADCThreshold:	 1	25	15
+SADCThreshold:	 1	26	15
+SADCThreshold:	 1	27	15
+SADCThreshold:	 1	28	15
+SADCThreshold:	 1	29	15
+SADCThreshold:	 1	30	15
+SADCThreshold:	 1	31	15
+*
+SADCThreshold:	 2	 0	15
+SADCThreshold:	 2	 1	15
+SADCThreshold:	 2	 2	15
+SADCThreshold:	 2 	 3	15
+SADCThreshold:	 2	 4	15
+SADCThreshold:	 2	 5	15
+SADCThreshold:	 2	 6	15
+SADCThreshold:	 2	 7	15
+SADCThreshold:	 2	 8	15
+SADCThreshold:	 2	 9	15
+SADCThreshold:	 2	10	15
+SADCThreshold:	 2	11	15
+SADCThreshold:	 2	12	15
+SADCThreshold:	 2	13	15
+SADCThreshold:	 2	14	15
+SADCThreshold:	 2	15	15
+SADCThreshold:	 2	16	15
+SADCThreshold:	 2	17	15
+SADCThreshold:	 2 	18	15
+SADCThreshold:	 2	19	15
+SADCThreshold:	 2	20	15
+SADCThreshold:	 2	21	15
+SADCThreshold:	 2	22	15
+SADCThreshold:	 2	23	15
+SADCThreshold:	 2	24	15
+SADCThreshold:	 2	25	15
+SADCThreshold:	 2	26	15
+SADCThreshold:	 2	27	15
+SADCThreshold:	 2	28	15
+SADCThreshold:	 2	29	15
+SADCThreshold:	 2	30	15
+SADCThreshold:	 2	31	15
+*
+SADCThreshold:	 3	 0	15
+SADCThreshold:	 3	 1	15
+SADCThreshold:	 3	 2	15
+SADCThreshold:	 3 	 3	15
+SADCThreshold:	 3	 4	15
+SADCThreshold:	 3	 5	15
+SADCThreshold:	 3	 6	15
+SADCThreshold:	 3	 7	15
+SADCThreshold:	 3	 8	15
+SADCThreshold:	 3	 9	15
+SADCThreshold:	 3	10	15
+SADCThreshold:	 3	11	15
+SADCThreshold:	 3	12	15
+SADCThreshold:	 3	13	15
+SADCThreshold:	 3	14	15
+SADCThreshold:	 3	15	15
+SADCThreshold:	 3	16	15
+SADCThreshold:	 3	17	15
+SADCThreshold:	 3 	18	15
+SADCThreshold:	 3	19	15
+SADCThreshold:	 3	20	15
+SADCThreshold:	 3	21	15
+SADCThreshold:	 3	22	15
+SADCThreshold:	 3	23	15
+SADCThreshold:	 3	24	15
+SADCThreshold:	 3	25	15
+SADCThreshold:	 3	26	15
+SADCThreshold:	 3	27	15
+SADCThreshold:	 3	28	15
+SADCThreshold:	 3	29	15
+SADCThreshold:	 3	30	15
+SADCThreshold:	 3	31	15
+*
+SADCThreshold:	 4	 0	15
+SADCThreshold:	 4	 1	15
+SADCThreshold:	 4	 2	15
+SADCThreshold:	 4 	 3	15
+SADCThreshold:	 4	 4	15
+SADCThreshold:	 4	 5	15
+SADCThreshold:	 4	 6	15
+SADCThreshold:	 4	 7	15
+SADCThreshold:	 4	 8	15
+SADCThreshold:	 4	 9	15
+SADCThreshold:	 4	10	15
+SADCThreshold:	 4	11	15
+SADCThreshold:	 4	12	15
+SADCThreshold:	 4	13	15
+SADCThreshold:	 4	14	15
+SADCThreshold:	 4	15	15
+SADCThreshold:	 4	16	15
+SADCThreshold:	 4	17	15
+SADCThreshold:	 4 	18	15
+SADCThreshold:	 4	19	15
+SADCThreshold:	 4	20	15
+SADCThreshold:	 4	21	15
+SADCThreshold:	 4	22	15
+SADCThreshold:	 4	23	15
+SADCThreshold:	 4	24	15
+SADCThreshold:	 4	25	15
+SADCThreshold:	 4	26	15
+SADCThreshold:	 4	27	15
+SADCThreshold:	 4	28	15
+SADCThreshold:	 4	29	15
+SADCThreshold:	 4	30	15
+SADCThreshold:	 4	31	15
+*
+SADCThreshold:	 5	 0	15
+SADCThreshold:	 5	 1	15
+SADCThreshold:	 5	 2	15
+SADCThreshold:	 5	 3	15
+SADCThreshold:	 5	 4	15
+SADCThreshold:	 5	 5	15
+SADCThreshold:	 5	 6	15
+SADCThreshold:	 5	 7	15
+SADCThreshold:	 5	 8	15
+SADCThreshold:	 5	 9	15
+SADCThreshold:	 5	10	15
+SADCThreshold:	 5	11	15
+SADCThreshold:	 5	12	15
+SADCThreshold:	 5	13	15
+SADCThreshold:	 5	14	15
+SADCThreshold:	 5	15	15
+SADCThreshold:	 5	16	15
+SADCThreshold:	 5	17	15
+SADCThreshold:	 5	18	15
+SADCThreshold:	 5	19	15
+SADCThreshold:	 5	20	15
+SADCThreshold:	 5	21	15
+SADCThreshold:	 5	22	15
+SADCThreshold:	 5	23	15
+SADCThreshold:	 5	24      15
+SADCThreshold:	 5	25	15
+SADCThreshold:	 5	26	15
+SADCThreshold:	 5	27	15
+SADCThreshold:	 5	28	15
+SADCThreshold:	 5	29	15
+SADCThreshold:	 5	30	15
+SADCThreshold:	 5	31	15
+*
+*SADCThreshold:	 6	 0	15
+*SADCThreshold:	 6	 1	15
+*SADCThreshold:	 6	 2	15
+*SADCThreshold:	 6 	 3	15
+*SADCThreshold:	 6	 4	15
+*SADCThreshold:	 6	 5	15
+*SADCThreshold:	 6	 6	15
+*SADCThreshold:	 6	 7	15
+*SADCThreshold:	 6	 8	15
+*SADCThreshold:	 6	 9	15
+*SADCThreshold:	 6	10	15
+*SADCThreshold:	 6	11	15
+*SADCThreshold:	 6	12	15
+*SADCThreshold:	 6	13	15
+*SADCThreshold:	 6	14	15
+*SADCThreshold:	 6	15	15
+*SADCThreshold:	 6	16	15
+*SADCThreshold:	 6	17	15
+*SADCThreshold:	 6 	18	15
+*SADCThreshold:	 6	19	15
+*SADCThreshold:	 6	20	15
+*SADCThreshold:	 6	21	15
+*SADCThreshold:	 6	22	15
+*SADCThreshold:	 6	23	15
+*SADCThreshold:	 6	26	15
+*SADCThreshold:	 6	25	15
+*SADCThreshold:	 6	26	15
+*SADCThreshold:	 6	27	15
+*SADCThreshold:	 6	28	15
+*SADCThreshold:	 6	29	15
+*SADCThreshold:	 6	30	15
+*SADCThreshold:	 6	31	15
+*
+*SADCThreshold:	 7	 0	15
+*SADCThreshold:	 7	 1	15
+*SADCThreshold:	 7	 2	15
+*SADCThreshold:	 7 	 3	15
+*SADCThreshold:	 7	 4	15
+*SADCThreshold:	 7	 5	15
+*SADCThreshold:	 7	 6	15
+*SADCThreshold:	 7	 7	15
+*SADCThreshold:	 7	 8	15
+*SADCThreshold:	 7	 9	15
+*SADCThreshold:	 7	10	15
+*SADCThreshold:	 7	11	15
+*SADCThreshold:	 7	12	15
+*SADCThreshold:	 7	13	15
+*SADCThreshold:	 7	14	15
+*SADCThreshold:	 7	15	15
+*SADCThreshold:	 7	16	15
+*SADCThreshold:	 7	17	15
+*SADCThreshold:	 7 	18	15
+*SADCThreshold:	 7	19	15
+*SADCThreshold:	 7	20	15
+*SADCThreshold:	 7	21	15
+*SADCThreshold:	 7	22	15
+*SADCThreshold:	 7	23	15
+*SADCThreshold:	 7	26	15
+*SADCThreshold:	 7	25	15
+*SADCThreshold:	 7	26	15
+*SADCThreshold:	 7	27	15
+*SADCThreshold:	 7	28	15
+*SADCThreshold:	 7	29	15
+*SADCThreshold:	 7	30	15
+*SADCThreshold:	 7	31	15
+*

@@ -1,0 +1,59 @@
+####
+Description: Feb 2013 RUN TEST
+#Mk1-Format:
+File-Name: scratch/CB 32	500000	32768	ENet  32768  3024
+#File-Name: scratch/CB 32	500000	32768	No-Store  32768  3024
+# Frequency            Scaler	Slow-Control
+Event-Counters:	       20000000	0			
+Start-Run: 0
+#
+##Control:  Local    0     0
+#Control:   ENet	    a2TDCdaq1 4024
+#Control:   GUI-Local	    0 0
+Control:   ENetSlave	    a2TDCdaq1 4024
+#
+#	module	   Name		configFile
+Module:	KPH_I686   kphi686_0	kphi686.dat	0	0
+#Module: GSI_VUPROM vup0         vuprom.trig	ea000000 0 192 32 
+#Module: GSI_VUPROM vup1         vuprom.patt     ea000000 0 6 8
+###Module: SIS_3820   sis0	sis_0.dat	f8000000 0 0 16
+Module: GSI_VUPROM vup2         vuprom_evID.d  eb000000 0 0 32 
+Module: CBD_8210   cbd0		cbd8210_0.dat	800000	0	0
+#
+#----------------------------------------	crate	station
+Module: CAMAC	      a2_1	a2ctrl_0.dat	  2	30
+Module: CAMAC	      caen_208	caen_208.CB_TrigLevel    2	10
+Module: CAMAC	      a2_2	a2ctrl_0.dat	  3	30
+Module: CAMAC	      pid0	lrs_4413.pid	  3	22
+Module: CAMAC	      pid1	lrs_4413.pid	  3	23
+#
+Reset-Ctrl: kphi686_0
+#
+# -----------------------------------------             fIndex  fNcha Notread
+Module: CATCH_TDC    cat0 catchTDC.d 	e0300000	2000    128 	14
+Module: CATCH_TDC    cat1 catchTDC.d 	e0310000	2128    128 	14
+Module: CATCH_TDC    cat2 catchTDC.d 	e0320000	2256    128 	14
+Module: CATCH_TDC    cat3 catchTDC.d 	e0330000	2384    128 	14
+Module: CATCH_TDC    cat4 catchTDC.d 	e0340000	2512    128 	14
+Module: CATCH_TDC    cat5 catchTDC.d 	e0350000	2640    128 	14
+#
+Module: CATCH_TDC    cat6 catchTDC.d 	e0360000	4000    128 	14
+Module: CATCH_TDC    cat7 catchTDC.d 	e0370000	4128    128 	14
+Module: CATCH_TDC    cat8 catchTDC.d 	e0380000	4256    128 	14
+Module: CATCH_TDC    cat9 catchTDC.d 	e0390000	4384    128 	14
+Module: CATCH_TDC    cat10 catchTDC.d 	e03a0000	4512    128 	14
+#
+## Interrupt control module
+IRQ-Ctrl: cbd0
+##
+## Trigger enable and TCS start/stop module, 
+## and delay in usec after CATCH reset
+#Start-Ctrl: vup0 555000
+##EventID-Send: sis0
+EventID-Send: vup2
+##
+## Event Synchronisation info provider module and event ID index
+Synch-Ctrl: cat0 400
+########### End of File #######################
+
+
