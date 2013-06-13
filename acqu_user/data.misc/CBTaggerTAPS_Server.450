@@ -13,7 +13,7 @@ Input-Streams:  1              32768       0
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Optional directory spec. If not specified 'File-Name's must contain the full
 #directory path
-File-Directory: /data/disk1/2011_02_pi0_transverse_asymmetries/
+File-Directory: scratch/
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -21,7 +21,9 @@ File-Directory: /data/disk1/2011_02_pi0_transverse_asymmetries/
 #From disk file, ACQU (Mk1) format, save any output to file (save=1)
 #input data record length, output data record length
 #               Source  Format  Save?  RecLen   Buffers  Swap  MarkID
+#Stream-Spec:    File    Mk2     0      32768    32      0     400
 Stream-Spec:    File    Mk1     0      32768    32      0     400
+# Note: It does not detect Mk1/Mk2 automatically....
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -30,6 +32,7 @@ Stream-Spec:    File    Mk1     0      32768    32      0     400
 #February 2011 data:
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #450 MeV Compton, Butanol
-File-Name:  CB_35700.dat  0          0
+#File-Name:  RunTestPaoloPi0_May13_1502.dat  0          0
+File-Name:  Run_Deuterium_March2013_76.dat  0          0
 #- - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #

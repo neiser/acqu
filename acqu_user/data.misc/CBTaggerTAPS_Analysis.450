@@ -7,42 +7,42 @@
 #Configuration of CATCH TDCs (required for compatibility with configuration
 #files for experimental data)
 ##              No. of hits  First chan.  First chan.  Reference chan.
-MultiADC:       3             1401         1911         1400
+#MultiADC:       3             1401         1911         1400
 MultiADC:       3             2001         2767         2000
-*MultiADC:       3             4000         4511         2000
+#MultiADC:       3             4000         4511         2000
 #TAPS inner ring
-MultiADC:       3            30201        30350        30200
+#MultiADC:       3            30201        30350        30200
 #Configuration of iSADCs in 3-sum mode (required for compatibility with
 #configuration files for experimental data)
 #               No. of hits  First chan.   Last chan.  Sum1  Sum2  Sum3
 MultiADC:       3            3000          3735        30    30    30
-*MultiADC:       3            5000          5319        30    30    30
+#MultiADC:       3            5000          5319        30    30    30
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-RateMonitor: Trigger_Rate.450
-BitPattern:  Trigger_Pattern.450
+#RateMonitor: Trigger_Rate.450
+#BitPattern:  Trigger_Pattern.450
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Set-up of apparatus classes (CB, TAPS, Tagger). See their configuration files
 #for details of detector (PID, NaI, BaF2, ...) options
 #           Name     Class           Configuration file
-Apparatus:  Tagger   TA2KensTagger   Tagger.450
-Apparatus:  CB       TA2CB           CB.450
-Apparatus:  TAPS     TA2Taps         TAPS.450
+#Apparatus:  Tagger   TA2KensTagger   Tagger.450
+#Apparatus:  CB       TA2CB           CB.450
+#Apparatus:  TAPS     TA2Taps         TAPS.450
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Standard AcquRoot option
-Reconstruct-Analysis:
+#Reconstruct-Analysis:
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #High-level physics analysis, processing 4-vectors produced by apparatus
 #classes.
 ##                 Name      Class             Configuration File
-Physics-Analysis:  Pi0       TA2MesonPhysics   Pi0.450
+#Physics-Analysis:  Pi0       TA2MesonPhysics   Pi0.450
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -56,16 +56,21 @@ Initialise:
 # b) End of single data file
 # c) End of complete analysis
 #        No. of events  Macro file name             Macro function
-*Period:  10000          root/macros/PeriodMacro.C   PeriodMacro()
+#Period:  10000          root/macros/PeriodMacro.C   PeriodMacro()
 #        Macro file name              Macro funcion
-EndFile: root/macros/EndFileMacro.C   EndFileMacro()
+#EndFile: root/macros/EndFileMacro.C   EndFileMacro()
 #        Macro file name              Macro funcion
-*Finish:  root/macros/FinishMacro.C    FinishMacro()
+#Finish:  root/macros/FinishMacro.C    FinishMacro()
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #Save all accepted events (i.e. those passing all data cuts) to a ROOT tree
 #file. Data is saved in RAW format (i.e. only ADC indices and values).
-*Save-Event:
+#Save-Event:
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
+
+## CB TDCs
+Display: MultiHit 2032 2732 3000 -3000 -2000 0
+## CB SADCs
+Display: MultiHit 3000 3719 1000 0  6000 1
