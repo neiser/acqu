@@ -184,10 +184,10 @@ void TTRB3module::ReadIRQ(void** outBuffer)
 
     // at least for the TDCs we send it as 0.1171 ns ticks (as the F1 CATCH TDCs do)
     // and center the value by an offset
-    ADCStore(outBuffer, (UShort_t)(10000+leadingEdge/0.1171d), adcIndex);
+    ADCStore(outBuffer, (UShort_t)(10000+leadingEdge/0.1171), adcIndex);
 
     // for the QDC value (=charge information) we have no clue at the moment how to convert it
-    ADCStore(outBuffer, (UShort_t)((10.0d+timeOverThreshold)*100.0d), adcIndex);
+    ADCStore(outBuffer, (UShort_t)((10.0+timeOverThreshold)*100.0), adcIndex);
 
     if(fTRB3debug)
       cout << "EVENT: Idx " << adcIndex  << ", Edge " << leadingEdge << ", ToT " << timeOverThreshold << endl;
