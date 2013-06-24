@@ -22,7 +22,7 @@ File-Directory: scratch/
 #input data record length, output data record length
 #               Source  Format  Save?  RecLen   Buffers  Swap  MarkID
 #Stream-Spec:    File    Mk2     0      32768    32      0     400
-Stream-Spec:    File    Mk1     0      32768    32      0     400
+Stream-Spec:    File    Mk2     0      32768    32      0     400
 # Note: It does not detect Mk1/Mk2 automatically....
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
@@ -33,6 +33,14 @@ Stream-Spec:    File    Mk1     0      32768    32      0     400
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #450 MeV Compton, Butanol
 #File-Name:  RunTestPaoloPi0_May13_1502.dat  0          0
-File-Name:  Run_Deuterium_March2013_76.dat  0          0
+#File-Name:  Run_Deuterium_March2013_76.dat  0          0
+
+# Jennifer's run with source (2GB file)
+File-Name: Run_Calib_Jun13_2166.dat 0 0
+
+# Andi's run without source (just cosmics)
+#File-Name: Run_Calib_Jun13_2173.dat 0 0
+
+
 #- - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
