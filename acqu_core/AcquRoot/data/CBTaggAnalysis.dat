@@ -103,7 +103,7 @@ MultiADC:       2       200    215
 #Display: MultiHit 2008 2031 1000 -3500 -1500 0
 ##
 ## CB TDCs
-Display: MultiHit 200 215 100  5000 7000 0
+Display: MultiHit 200 215 500  7800 8500 0
 Display: MultiHit 200 215 100  500 4500 1
 ##
 ## WC CATCH TDC's

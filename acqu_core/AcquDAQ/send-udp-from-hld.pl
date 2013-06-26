@@ -10,7 +10,7 @@ use Time::HiRes qw(usleep);
 
 
 my $infile = shift || die "Usage: $0 <infile>\n";
-my $max_packets = shift || 1;
+my $max_packets = shift || 'inf';
 my $skippackets = shift || 0;
 my $sock = IO::Socket::INET->new(
                                  Proto    => 'udp',

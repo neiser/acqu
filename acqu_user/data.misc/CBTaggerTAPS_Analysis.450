@@ -71,16 +71,16 @@ Initialise:
 #
 
 ## CB TDCs (bunch 63/64)
-Display: MultiHit 2528 2543 500 -6000 -2000 0
+Display: MultiHit 2528 2543 500 -3500 -2800 0
 ## CB SADCs (bunch 63/64)
 # note that SADCs have integer resolution,
 # thus finer binning shows needle structure
-Display: MultiHit 3496 3511 300 0  300 1
+Display: MultiHit 3496 3511 3000 0  3000 1
 
 ## CB TDCs (bunch 68, same horizontal location as 63)
-Display: MultiHit 2568 2575 500 -6000 -2000 0
+Display: MultiHit 2568 2575 500 -3500 -2800 0
 ## CB SADCs (bunch 68, same horizontal location as 63)
-Display: MultiHit 3528 3535 300 0  300 1
+Display: MultiHit 3528 3535 3000 0  3000 1
 
 # bunch 63/64 copied from D.Krambrich's dissertation, appendix A
 #496    63   1      18    4   6    3511   2528

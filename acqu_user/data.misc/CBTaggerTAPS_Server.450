@@ -36,10 +36,10 @@ Stream-Spec:    File    Mk2     0      32768    32      0     400
 #File-Name:  Run_Deuterium_March2013_76.dat  0          0
 
 # Jennifer's run with source (2GB file)
-File-Name: Run_Calib_Jun13_2166.dat 0 0
+#File-Name: Run_Calib_Jun13_2166.dat 0 0
 
 # Andi's run without source (just cosmics)
-#File-Name: Run_Calib_Jun13_2173.dat 0 0
+File-Name: Run_Calib_Jun13_2173.dat 0 0
 
 
 #- - - - - - - - - - - -  - - - - - - - - - - - - - - - - - - - - - - - - - - -
