@@ -1,0 +1,43 @@
+#########################################################################
+#                                                                       #
+# Physics analysis class configuration file                             #
+#                                                                       #
+#########################################################################
+
+
+Reconstruct:
+
+
+#ParticleID:  256
+
+
+#
+# CaLib configuration
+#
+
+# General:      dbhost       dbname   dbuser      dbpass        calibration
+Use-CaLib:      a2calib.online.a2.kph    calib    calib       basel10    	ETAP_Aug_12
+#
+# miscellaneous calibrations    # target position  (0=off/1=on)
+Use-CaLib-Misc:                 0
+# tagger calib:     time  (0=off/1=on)
+Use-CaLib-TAGG:     0
+# CB calib:         energy  time    timewalk    quadr. energy  (0=off/1=on)
+Use-CaLib-CB:       1       1       0           0
+# TAPS calib:       energy  time    quadr. energy   LED thr.  (0=off/1=on)
+Use-CaLib-TAPS:     0       1       0               0
+# PID calib:        phi     droop   energy  time  (0=off/1=on)
+Use-CaLib-PID:      1       0       0       1
+# Veto calib:       energy  time  (0=off/1=on)
+Use-CaLib-Veto:     0       1
+
+
+
+Use-CaLib-CBEnergyPerRun:	data/CBEnergyCorrectionPerRun.txt
+
+
+
+Initialise:
+
+
+

@@ -1,0 +1,68 @@
+##-----------------------------------------------------------------------
+##--Author	JRM Annand   29th Apr 2003
+##--Update	JRM Annand...
+##--Description
+##                *** Acqu++ <-> Root ***
+## Online/Offline Analysis of Sub-Atomic Physics Experimental Data 
+##
+## CB-Tagger synchronisation
+## Plot CB reference TDC (ADC 1400) vs Tagger reference TDC (ADC 2000)
+## Plot also the difference...RMS width should be less than 0.2ns
+## Use dummy "longscint bar" to get the difference
+## CB-TAPS synchronisation
+## Plot CB Ped-pulser TDC (ADC 2005) vs Selected TAPS BaF2 TDCs
+##
+##-----------------------------------------------------------------------
+## Total # Elements in array, Pulse-Height info? Time info? Position info?
+## Info switch is off/on = 0/1
+##	Total	Energy?	Time?	Position?
+Size:	12	1	1	1
+##
+## Calibration factors for each PMT...one line for each
+## Can optionally enter TDC-Time onfo...extra 5 parameters per line
+## low, high are energy cuts, ped is the pedestal, MeV/chan conversion gain
+##	 ADC#  low high	ped MeV/ch	TDC# low/high/of  ns/ch  Pos xyz (cm)
+Element: 2005M0   0 20.	-550 0.117	2005M0 0 20   -550  0.117  0.0 0.0 0.0
+Element: 2005M0   0 20.	-550 0.117	20401 0 400    0  0.100  0.0 0.0 0.0 
+Element: 2005M0   0 20.	-550 0.117	21401 0 400    0  0.100  0.0 0.0 0.0 
+Element: 2005M0   0 20.	-550 0.117	22401 0 400    0  0.100  0.0 0.0 0.0 
+Element: 2005M0   0 20.	-550 0.117	23401 0 400    0  0.100  0.0 0.0 0.0 
+Element: 2005M0   0 20.	-550 0.117	24401 0 400    0  0.100  0.0 0.0 0.0 
+Element: 2005M0   0 20.	-550 0.117	25401 0 400    0  0.100  0.0 0.0 0.0 
+Element: 2005M0   0 20.	-550 0.117	26301 0 400    0  0.100  0.0 0.0 0.0 
+Element: 2005M0   0 20.	-550 0.117	27301 0 400    0  0.100  0.0 0.0 0.0 
+Element: 2005M0   0 20.	-550 0.117	28301 0 400    0  0.100  0.0 0.0 0.0 
+Element: 2001M0  0 200	-600 0.117	1400 0 10000 0 0.117  0.0 0.0 0.0
+Element: 2001M0  0 200	-600 0.117	2000 0 10000 0 0.117  0.0 0.0 0.0 
+##
+## No. or bars in array...Bar-Size should normally be Size/2
+Bar-Size: 10
+## Associate PMT's to bars
+##	PMT1	PMT2	Ceff(cm/ns)	y-extent(cm)	z-extent(cm)
+Bar:	0	1	20		20		10
+Bar:	0	2	20		20		10
+Bar:	0	3	20		20		10
+Bar:	0	4	20		20		10
+Bar:	0	5	20		20		10
+Bar:	0	6	20		20		10
+Bar:	0	7	20		20		10
+Bar:	0	8	20		20		10
+Bar:	0	9	20		20		10
+Bar:	10	11	20		20		10
+##
+##
+## Do some further array initialisation BEFORE display specification
+Initialise:
+##
+## Hit ultiplicity, 12 channels, range 0 -- 11
+#Display:	1D	Nhits  	8	0	8
+## Hit frequency distribution, 12 channels, range 0 -- 11
+#Display:	1D	Trigger		24	0	24
+#Display:	1D	Hits		24	0	24
+#Display: 1D	MeanTime	 80 0  20	0 3
+#Display: 1D	TimeDiff	100 -130 -100	0 8
+#Display: 1D	TimeDiff	500 0 117	9 9
+#Display	 1D	BarHits		8   0 9
+#Display	 1D	NBarHits        8   0 9
+#Display: 2D	Time	        100 0 8000 10	Time	100 0 8000 11
+##

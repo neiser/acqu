@@ -1,0 +1,285 @@
+##-----------------------------------------------------------------------
+##--Author	JRM Annand   13th Jan 2004
+##--Update	JRM Annand... 1st Dec 2004
+##--Description
+##                *** Acqu++ <-> Root ***
+## Online/Offline Analysis of Sub-Atomic Physics Experimental Data 
+##
+## Parameter File: FPcommServer.Offline
+## Configuration file for DataServer (data input for analysis)
+##
+##-----------------------------------------------------------------------
+## Number of Input streams (sources of data), Record length to write data
+## and switch 0/1 = no/yes to control data write
+##              Number streams	Record Len	Save Data
+Input-Streams:	1		32768		0
+##
+## Optional directory spec. If not specified File-Names must contain the full
+## directory path
+#File-Directory: 	scratch/august.2012/
+#File-Directory: 	scratch/out/
+File-Directory:		/data/RAID0_datastore/ott/2012_08_EPT/
+##
+## Specify each input stream
+## From disk file, ACQU (Mk1) format, save any output to file (save=1)
+## Input data record length, Output data record length
+##
+##            	Source	Format	Save?	RecLen	Buffers	Swap	MarkID
+Stream-Spec:	File	Mk1	0	32768	32	0	400
+##
+## Now the list of data files to analyse
+##		File Name	1st rec	Last rec
+##
+File-Name:	CB_42400.dat	0	0	
+File-Name:	CB_42401.dat	0	0	
+File-Name:	CB_42402.dat	0	0	
+File-Name:	CB_42403.dat	0	0	
+File-Name:	CB_42404.dat	0	0	
+File-Name:	CB_42405.dat	0	0	
+File-Name:	CB_42406.dat	0	0	
+File-Name:	CB_42407.dat	0	0	
+File-Name:	CB_42408.dat	0	0	
+File-Name:	CB_42409.dat	0	0
+File-Name:	CB_42410.dat	0	0	
+File-Name:	CB_42411.dat	0	0	
+File-Name:	CB_42412.dat	0	0	
+File-Name:	CB_42413.dat	0	0	
+File-Name:	CB_42414.dat	0	0	
+File-Name:	CB_42415.dat	0	0	
+File-Name:	CB_42416.dat	0	0	
+File-Name:	CB_42417.dat	0	0	
+File-Name:	CB_42418.dat	0	0	
+File-Name:	CB_42419.dat	0	0
+File-Name:	CB_42420.dat	0	0	
+File-Name:	CB_42421.dat	0	0	
+File-Name:	CB_42425.dat	0	0	
+File-Name:	CB_42426.dat	0	0	
+File-Name:	CB_42424.dat	0	0	
+File-Name:	CB_42425.dat	0	0	
+File-Name:	CB_42426.dat	0	0	
+File-Name:	CB_42427.dat	0	0	
+File-Name:	CB_42428.dat	0	0	
+File-Name:	CB_42429.dat	0	0
+File-Name:	CB_42430.dat	0	0	
+File-Name:	CB_42431.dat	0	0	
+File-Name:	CB_42432.dat	0	0	
+File-Name:	CB_42433.dat	0	0	
+File-Name:	CB_42434.dat	0	0	
+File-Name:	CB_42435.dat	0	0	
+File-Name:	CB_42436.dat	0	0	
+File-Name:	CB_42437.dat	0	0	
+File-Name:	CB_42438.dat	0	0	
+File-Name:	CB_42439.dat	0	0
+File-Name:	CB_42440.dat	0	0	
+File-Name:	CB_42441.dat	0	0	
+File-Name:	CB_42442.dat	0	0	
+File-Name:	CB_42443.dat	0	0	
+File-Name:	CB_42444.dat	0	0	
+File-Name:	CB_42445.dat	0	0	
+File-Name:	CB_42446.dat	0	0	
+File-Name:	CB_42447.dat	0	0	
+File-Name:	CB_42448.dat	0	0	
+File-Name:	CB_42449.dat	0	0
+File-Name:	CB_42450.dat	0	0	
+File-Name:	CB_42451.dat	0	0	
+File-Name:	CB_42452.dat	0	0	
+File-Name:	CB_42453.dat	0	0	
+File-Name:	CB_42454.dat	0	0	
+File-Name:	CB_42455.dat	0	0	
+File-Name:	CB_42456.dat	0	0	
+File-Name:	CB_42457.dat	0	0	
+File-Name:	CB_42458.dat	0	0	
+File-Name:	CB_42459.dat	0	0
+File-Name:	CB_42460.dat	0	0	
+File-Name:	CB_42461.dat	0	0	
+File-Name:	CB_42462.dat	0	0	
+File-Name:	CB_42463.dat	0	0	
+File-Name:	CB_42464.dat	0	0	
+File-Name:	CB_42465.dat	0	0	
+File-Name:	CB_42466.dat	0	0	
+File-Name:	CB_42467.dat	0	0	
+File-Name:	CB_42468.dat	0	0	
+File-Name:	CB_42469.dat	0	0
+File-Name:	CB_42470.dat	0	0	
+File-Name:	CB_42471.dat	0	0	
+File-Name:	CB_42472.dat	0	0	
+File-Name:	CB_42473.dat	0	0	
+File-Name:	CB_42474.dat	0	0	
+File-Name:	CB_42475.dat	0	0	
+File-Name:	CB_42476.dat	0	0	
+File-Name:	CB_42477.dat	0	0	
+File-Name:	CB_42478.dat	0	0	
+File-Name:	CB_42479.dat	0	0
+File-Name:	CB_42480.dat	0	0	
+File-Name:	CB_42481.dat	0	0	
+File-Name:	CB_42482.dat	0	0	
+File-Name:	CB_42483.dat	0	0	
+File-Name:	CB_42484.dat	0	0	
+File-Name:	CB_42485.dat	0	0	
+File-Name:	CB_42486.dat	0	0	
+File-Name:	CB_42487.dat	0	0	
+File-Name:	CB_42488.dat	0	0	
+File-Name:	CB_42489.dat	0	0
+File-Name:	CB_42490.dat	0	0	
+File-Name:	CB_42491.dat	0	0	
+File-Name:	CB_42492.dat	0	0	
+File-Name:	CB_42493.dat	0	0	
+File-Name:	CB_42494.dat	0	0	
+File-Name:	CB_42495.dat	0	0	
+File-Name:	CB_42496.dat	0	0	
+File-Name:	CB_42497.dat	0	0	
+File-Name:	CB_42498.dat	0	0	
+File-Name:	CB_42499.dat	0	0
+#
+#
+#
+File-Name:	CB_42500.dat	0	0	
+File-Name:	CB_42501.dat	0	0	
+File-Name:	CB_42502.dat	0	0	
+File-Name:	CB_42503.dat	0	0	
+File-Name:	CB_42504.dat	0	0	
+File-Name:	CB_42505.dat	0	0	
+File-Name:	CB_42506.dat	0	0	
+File-Name:	CB_42507.dat	0	0	
+File-Name:	CB_42508.dat	0	0	
+File-Name:	CB_42509.dat	0	0
+File-Name:	CB_42510.dat	0	0	
+File-Name:	CB_42511.dat	0	0	
+File-Name:	CB_42512.dat	0	0	
+File-Name:	CB_42513.dat	0	0	
+File-Name:	CB_42514.dat	0	0	
+File-Name:	CB_42515.dat	0	0	
+File-Name:	CB_42516.dat	0	0	
+File-Name:	CB_42517.dat	0	0	
+File-Name:	CB_42518.dat	0	0	
+File-Name:	CB_42519.dat	0	0
+File-Name:	CB_42520.dat	0	0	
+File-Name:	CB_42521.dat	0	0	
+File-Name:	CB_42522.dat	0	0	
+File-Name:	CB_42523.dat	0	0	
+File-Name:	CB_42524.dat	0	0	
+File-Name:	CB_42525.dat	0	0	
+File-Name:	CB_42526.dat	0	0	
+File-Name:	CB_42527.dat	0	0	
+File-Name:	CB_42528.dat	0	0	
+File-Name:	CB_42529.dat	0	0
+File-Name:	CB_42530.dat	0	0	
+File-Name:	CB_42531.dat	0	0	
+File-Name:	CB_42532.dat	0	0	
+File-Name:	CB_42533.dat	0	0	
+File-Name:	CB_42534.dat	0	0	
+File-Name:	CB_42535.dat	0	0	
+File-Name:	CB_42536.dat	0	0	
+File-Name:	CB_42537.dat	0	0	
+File-Name:	CB_42538.dat	0	0	
+File-Name:	CB_42539.dat	0	0
+File-Name:	CB_42540.dat	0	0	
+File-Name:	CB_42541.dat	0	0	
+File-Name:	CB_42542.dat	0	0	
+File-Name:	CB_42543.dat	0	0	
+File-Name:	CB_42544.dat	0	0	
+File-Name:	CB_42545.dat	0	0	
+File-Name:	CB_42546.dat	0	0	
+File-Name:	CB_42547.dat	0	0	
+File-Name:	CB_42548.dat	0	0	
+File-Name:	CB_42549.dat	0	0
+File-Name:	CB_42550.dat	0	0	
+File-Name:	CB_42551.dat	0	0	
+File-Name:	CB_42552.dat	0	0	
+File-Name:	CB_42553.dat	0	0	
+File-Name:	CB_42554.dat	0	0	
+File-Name:	CB_42555.dat	0	0	
+File-Name:	CB_42556.dat	0	0	
+File-Name:	CB_42557.dat	0	0	
+File-Name:	CB_42558.dat	0	0	
+File-Name:	CB_42559.dat	0	0
+File-Name:	CB_42560.dat	0	0	
+File-Name:	CB_42561.dat	0	0	
+File-Name:	CB_42562.dat	0	0	
+File-Name:	CB_42563.dat	0	0	
+File-Name:	CB_42564.dat	0	0	
+File-Name:	CB_42565.dat	0	0	
+File-Name:	CB_42566.dat	0	0	
+File-Name:	CB_42567.dat	0	0	
+File-Name:	CB_42568.dat	0	0	
+File-Name:	CB_42569.dat	0	0
+File-Name:	CB_42570.dat	0	0	
+File-Name:	CB_42571.dat	0	0	
+File-Name:	CB_42572.dat	0	0	
+File-Name:	CB_42573.dat	0	0	
+File-Name:	CB_42574.dat	0	0	
+File-Name:	CB_42575.dat	0	0	
+File-Name:	CB_42576.dat	0	0	
+File-Name:	CB_42577.dat	0	0	
+File-Name:	CB_42578.dat	0	0	
+File-Name:	CB_42579.dat	0	0
+File-Name:	CB_42580.dat	0	0	
+File-Name:	CB_42581.dat	0	0	
+File-Name:	CB_42582.dat	0	0	
+File-Name:	CB_42583.dat	0	0	
+File-Name:	CB_42584.dat	0	0	
+File-Name:	CB_42585.dat	0	0	
+File-Name:	CB_42586.dat	0	0	
+File-Name:	CB_42587.dat	0	0	
+File-Name:	CB_42588.dat	0	0	
+File-Name:	CB_42589.dat	0	0
+File-Name:	CB_42590.dat	0	0	
+File-Name:	CB_42591.dat	0	0	
+File-Name:	CB_42592.dat	0	0	
+File-Name:	CB_42593.dat	0	0	
+File-Name:	CB_42594.dat	0	0	
+File-Name:	CB_42595.dat	0	0	
+File-Name:	CB_42596.dat	0	0	
+File-Name:	CB_42597.dat	0	0	
+File-Name:	CB_42598.dat	0	0	
+File-Name:	CB_42599.dat	0	0
+#
+#
+#
+File-Name:	CB_42600.dat	0	0	
+File-Name:	CB_42601.dat	0	0	
+File-Name:	CB_42602.dat	0	0	
+File-Name:	CB_42603.dat	0	0	
+File-Name:	CB_42604.dat	0	0	
+File-Name:	CB_42605.dat	0	0	
+File-Name:	CB_42606.dat	0	0	
+File-Name:	CB_42607.dat	0	0	
+File-Name:	CB_42608.dat	0	0	
+File-Name:	CB_42609.dat	0	0
+File-Name:	CB_42610.dat	0	0	
+File-Name:	CB_42611.dat	0	0	
+File-Name:	CB_42612.dat	0	0	
+File-Name:	CB_42613.dat	0	0	
+File-Name:	CB_42614.dat	0	0	
+File-Name:	CB_42615.dat	0	0	
+File-Name:	CB_42616.dat	0	0	
+File-Name:	CB_42617.dat	0	0	
+File-Name:	CB_42618.dat	0	0	
+File-Name:	CB_42619.dat	0	0
+File-Name:	CB_42620.dat	0	0	
+File-Name:	CB_42621.dat	0	0	
+File-Name:	CB_42622.dat	0	0	
+File-Name:	CB_42623.dat	0	0	
+File-Name:	CB_42624.dat	0	0	
+File-Name:	CB_42625.dat	0	0	
+File-Name:	CB_42626.dat	0	0	
+File-Name:	CB_42627.dat	0	0	
+File-Name:	CB_42628.dat	0	0	
+File-Name:	CB_42629.dat	0	0
+File-Name:	CB_42630.dat	0	0	
+File-Name:	CB_42631.dat	0	0	
+File-Name:	CB_42632.dat	0	0	
+File-Name:	CB_42633.dat	0	0	
+File-Name:	CB_42634.dat	0	0	
+File-Name:	CB_42635.dat	0	0	
+File-Name:	CB_42636.dat	0	0	
+File-Name:	CB_42637.dat	0	0	
+File-Name:	CB_42638.dat	0	0	
+File-Name:	CB_42639.dat	0	0
+File-Name:	CB_42640.dat	0	0	
+File-Name:	CB_42641.dat	0	0	
+File-Name:	CB_42642.dat	0	0	
+File-Name:	CB_42643.dat	0	0	
+File-Name:	CB_42644.dat	0	0	
+File-Name:	CB_42645.dat	0	0	
+## END

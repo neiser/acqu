@@ -1,0 +1,43 @@
+##-----------------------------------------------------------------------
+##--Author	JRM Annand   13th Jul 2007
+##--Update	JRM Annand...
+##--Description
+##                *** Acqu++ <-> Root ***
+## Online/Offline Analysis of Sub-Atomic Physics Experimental Data 
+##
+## Trigger monitoring stuff
+##
+##-----------------------------------------------------------------------
+##
+## Specify list of detectors which constitute the apparatus
+## pMicro is the prototype high-resolution detector for the tagger FP
+##	  Name		Class Name      	Setup file
+Detector: TrigSynch     TA2LongScint            data/Dec2012/Trigger/CBTaggTAPSSynch.13.07.07
+##
+## Turn on apparatus reconstruction 
+#Reconstruct:
+##
+## Do some post-initialisation.
+## Should usually be done before display is setup
+Initialise:
+##
+## Setup of extra procedures to run at periodic intervals
+## Every N events
+##	  N		macro file		macro procedure
+#Period:   2		CBPeriodMacro.C		CBPeriodMacro()
+#
+## Cut specification
+## NB 2D cuts, ie a general polygon on the X-Y plane not yet implemented
+## Simple rectangle cuts may be made by an AND of X and Y conditions
+## To enable cuts on the total invariant mass spectrum uncomment the Data-Cut
+## lines below
+##         1/2D Name    Link    Scope          Low/High Limits
+#Data-Cut: 1D   MtotC	AND     compound-data
+#Data-Cut: 1D   Mtot	OR      element        100 180
+#Data-Cut: 1D   Mtot	OR      element        500 600
+#
+## Histograms of apparatus-level variables
+## histogram name should be preceeded by 1D or 2D (for dimension of spectrum)
+##          Name        chan/low/high   min/max condition(opt)
+#Display: 1D Nhit    	32  0 32
+##

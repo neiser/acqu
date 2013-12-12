@@ -1,0 +1,133 @@
+##-----------------------------------------------------------------------
+##--Author	JRM Annand   13th Jan 2004
+##--Update	JRM Annand... 1st Dec 2004
+##--Description
+##                *** Acqu++ <-> Root ***
+## Online/Offline Analysis of Sub-Atomic Physics Experimental Data 
+##
+## Parameter File: FPcommServer.Offline
+## Configuration file for DataServer (data input for analysis)
+##
+##-----------------------------------------------------------------------
+## Number of Input streams (sources of data), Record length to write data
+## and switch 0/1 = no/yes to control data write
+##              Number streams	Record Len	Save Data
+Input-Streams:	1		32768		0
+##
+## Optional directory spec. If not specified File-Names must contain the full
+## directory path
+#File-Directory: 	scratch/august.2012/
+#File-Directory: 	scratch/out/
+File-Directory:		/data/RAID0_datastore/ott/2012_08_EPT/
+##
+## Specify each input stream
+## From disk file, ACQU (Mk1) format, save any output to file (save=1)
+## Input data record length, Output data record length
+##
+##            	Source	Format	Save?	RecLen	Buffers	Swap	MarkID
+Stream-Spec:	File	Mk1	0	32768	32	0	400
+##
+## Now the list of data files to analyse
+##		File Name	1st rec	Last rec
+##
+File-Name:	CB_42000.dat	0	0	
+File-Name:	CB_42001.dat	0	0	
+File-Name:	CB_42002.dat	0	0	
+File-Name:	CB_42003.dat	0	0	
+File-Name:	CB_42004.dat	0	0	
+File-Name:	CB_42005.dat	0	0	
+File-Name:	CB_42006.dat	0	0	
+File-Name:	CB_42007.dat	0	0	
+File-Name:	CB_42008.dat	0	0	
+File-Name:	CB_42009.dat	0	0
+File-Name:	CB_42010.dat	0	0	
+File-Name:	CB_42011.dat	0	0	
+File-Name:	CB_42012.dat	0	0	
+File-Name:	CB_42013.dat	0	0	
+File-Name:	CB_42014.dat	0	0	
+File-Name:	CB_42015.dat	0	0	
+File-Name:	CB_42016.dat	0	0	
+File-Name:	CB_42017.dat	0	0	
+File-Name:	CB_42018.dat	0	0	
+File-Name:	CB_42019.dat	0	0
+File-Name:	CB_42020.dat	0	0	
+File-Name:	CB_42021.dat	0	0	
+File-Name:	CB_42022.dat	0	0	
+File-Name:	CB_42023.dat	0	0	
+File-Name:	CB_42024.dat	0	0	
+File-Name:	CB_42025.dat	0	0	
+File-Name:	CB_42026.dat	0	0	
+File-Name:	CB_42027.dat	0	0	
+File-Name:	CB_42028.dat	0	0	
+File-Name:	CB_42029.dat	0	0
+File-Name:	CB_42030.dat	0	0	
+File-Name:	CB_42031.dat	0	0	
+File-Name:	CB_42032.dat	0	0	
+File-Name:	CB_42033.dat	0	0	
+File-Name:	CB_42034.dat	0	0	
+File-Name:	CB_42035.dat	0	0	
+File-Name:	CB_42036.dat	0	0	
+File-Name:	CB_42037.dat	0	0	
+File-Name:	CB_42038.dat	0	0	
+File-Name:	CB_42039.dat	0	0
+File-Name:	CB_42040.dat	0	0	
+File-Name:	CB_42041.dat	0	0	
+File-Name:	CB_42042.dat	0	0	
+File-Name:	CB_42043.dat	0	0	
+File-Name:	CB_42044.dat	0	0	
+File-Name:	CB_42045.dat	0	0	
+File-Name:	CB_42046.dat	0	0	
+File-Name:	CB_42047.dat	0	0	
+File-Name:	CB_42048.dat	0	0	
+File-Name:	CB_42049.dat	0	0
+File-Name:	CB_42050.dat	0	0	
+File-Name:	CB_42051.dat	0	0	
+File-Name:	CB_42052.dat	0	0	
+File-Name:	CB_42053.dat	0	0	
+File-Name:	CB_42054.dat	0	0	
+File-Name:	CB_42055.dat	0	0	
+File-Name:	CB_42056.dat	0	0	
+File-Name:	CB_42057.dat	0	0	
+File-Name:	CB_42058.dat	0	0	
+File-Name:	CB_42059.dat	0	0
+File-Name:	CB_42060.dat	0	0	
+File-Name:	CB_42061.dat	0	0	
+File-Name:	CB_42062.dat	0	0	
+File-Name:	CB_42063.dat	0	0	
+File-Name:	CB_42064.dat	0	0	
+File-Name:	CB_42065.dat	0	0	
+File-Name:	CB_42066.dat	0	0	
+File-Name:	CB_42067.dat	0	0	
+File-Name:	CB_42068.dat	0	0	
+File-Name:	CB_42069.dat	0	0
+File-Name:	CB_42070.dat	0	0	
+File-Name:	CB_42071.dat	0	0	
+File-Name:	CB_42072.dat	0	0	
+File-Name:	CB_42073.dat	0	0	
+File-Name:	CB_42074.dat	0	0	
+File-Name:	CB_42075.dat	0	0	
+File-Name:	CB_42076.dat	0	0	
+File-Name:	CB_42077.dat	0	0	
+File-Name:	CB_42078.dat	0	0	
+File-Name:	CB_42079.dat	0	0
+File-Name:	CB_42080.dat	0	0	
+File-Name:	CB_42081.dat	0	0	
+File-Name:	CB_42082.dat	0	0	
+File-Name:	CB_42083.dat	0	0	
+File-Name:	CB_42084.dat	0	0	
+File-Name:	CB_42085.dat	0	0	
+File-Name:	CB_42086.dat	0	0	
+File-Name:	CB_42087.dat	0	0	
+File-Name:	CB_42088.dat	0	0	
+File-Name:	CB_42089.dat	0	0
+File-Name:	CB_42090.dat	0	0	
+File-Name:	CB_42091.dat	0	0	
+File-Name:	CB_42092.dat	0	0	
+File-Name:	CB_42093.dat	0	0	
+File-Name:	CB_42094.dat	0	0	
+File-Name:	CB_42095.dat	0	0	
+File-Name:	CB_42096.dat	0	0	
+File-Name:	CB_42097.dat	0	0	
+File-Name:	CB_42098.dat	0	0	
+File-Name:	CB_42099.dat	0	0
+## END

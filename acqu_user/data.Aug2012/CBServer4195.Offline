@@ -1,0 +1,88 @@
+##-----------------------------------------------------------------------
+##--Author	JRM Annand   13th Jan 2004
+##--Update	JRM Annand... 1st Dec 2004
+##--Description
+##                *** Acqu++ <-> Root ***
+## Online/Offline Analysis of Sub-Atomic Physics Experimental Data 
+##
+## Parameter File: FPcommServer.Offline
+## Configuration file for DataServer (data input for analysis)
+##
+##-----------------------------------------------------------------------
+## Number of Input streams (sources of data), Record length to write data
+## and switch 0/1 = no/yes to control data write
+##              Number streams	Record Len	Save Data
+Input-Streams:	1		32768		0
+##
+## Optional directory spec. If not specified File-Names must contain the full
+## directory path
+#File-Directory: 	scratch/august.2012/
+File-Directory: 	scratch/4195/
+#File-Directory:		/data/RAID0_datastore/ott/2012_08_EPT/runs/
+#File-Directory:		/daten/august.2012/
+##
+## Specify each input stream
+## From disk file, ACQU (Mk1) format, save any output to file (save=1)
+## Input data record length, Output data record length
+##
+##            	Source	Format	Save?	RecLen	Buffers	Swap	MarkID
+Stream-Spec:	File	Mk1	0	32768	32	0	400
+##
+## Now the list of data files to analyse
+##		File Name	1st rec	Last rec
+##
+File-Name:	CB_41950.dat	0	0
+File-Name:	CB_41951.dat	0	0
+File-Name:	CB_41952.dat	0	0
+File-Name:	CB_41953.dat	0	0
+File-Name:	CB_41954.dat	0	0
+File-Name:	CB_41955.dat	0	0
+File-Name:	CB_41956.dat	0	0
+File-Name:	CB_41957.dat	0	0
+File-Name:	CB_41958.dat	0	0
+File-Name:	CB_41959.dat	0	0
+##
+File-Name:	CB_41960.dat	0	0
+File-Name:	CB_41961.dat	0	0
+File-Name:	CB_41962.dat	0	0
+File-Name:	CB_41963.dat	0	0
+File-Name:	CB_41964.dat	0	0
+File-Name:	CB_41965.dat	0	0
+File-Name:	CB_41966.dat	0	0
+File-Name:	CB_41967.dat	0	0
+File-Name:	CB_41968.dat	0	0
+File-Name:	CB_41969.dat	0	0
+##
+File-Name:	CB_41970.dat	0	0
+File-Name:	CB_41971.dat	0	0
+File-Name:	CB_41972.dat	0	0
+File-Name:	CB_41973.dat	0	0
+File-Name:	CB_41974.dat	0	0
+File-Name:	CB_41975.dat	0	0
+File-Name:	CB_41976.dat	0	0
+File-Name:	CB_41977.dat	0	0
+File-Name:	CB_41978.dat	0	0
+File-Name:	CB_41979.dat	0	0
+##
+File-Name:	CB_41980.dat	0	0
+File-Name:	CB_41981.dat	0	0
+File-Name:	CB_41982.dat	0	0
+File-Name:	CB_41983.dat	0	0
+File-Name:	CB_41984.dat	0	0
+File-Name:	CB_41985.dat	0	0
+File-Name:	CB_41986.dat	0	0
+File-Name:	CB_41987.dat	0	0
+File-Name:	CB_41988.dat	0	0
+File-Name:	CB_41989.dat	0	0
+##
+File-Name:	CB_41990.dat	0	0
+File-Name:	CB_41991.dat	0	0
+File-Name:	CB_41992.dat	0	0
+File-Name:	CB_41993.dat	0	0
+File-Name:	CB_41994.dat	0	0
+File-Name:	CB_41995.dat	0	0
+File-Name:	CB_41996.dat	0	0
+File-Name:	CB_41997.dat	0	0
+File-Name:	CB_41998.dat	0	0
+File-Name:	CB_41999.dat	0	0
+## END
