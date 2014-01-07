@@ -31,14 +31,14 @@ Stream-Spec:	File	Mk1	0	32768	32	0	400
 ## Now the list of data files to analyse
 ##		File Name	1st rec	Last rec
 ##
-#File-Name:	CB_41920.dat	0	0
-#File-Name:	CB_41921.dat	0	0
+File-Name:	CB_41920.dat	0	0
+File-Name:	CB_41921.dat	0	0
 File-Name:	CB_41922.dat	0	0
-#File-Name:	CB_41923.dat	0	0
-#File-Name:	CB_41924.dat	0	0
-#File-Name:	CB_41925.dat	0	0
-#File-Name:	CB_41926.dat	0	0
-#File-Name:	CB_41927.dat	0	0
-#File-Name:	CB_41928.dat	0	0
-#File-Name:	CB_41929.dat	0	0
+File-Name:	CB_41923.dat	0	0
+File-Name:	CB_41924.dat	0	0
+File-Name:	CB_41925.dat	0	0
+File-Name:	CB_41926.dat	0	0
+File-Name:	CB_41927.dat	0	0
+File-Name:	CB_41928.dat	0	0
+File-Name:	CB_41929.dat	0	0
 ## END

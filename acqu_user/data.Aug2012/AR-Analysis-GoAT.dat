@@ -11,15 +11,14 @@ Reconstruct:
 #
 
 # General:      dbhost       		dbname   dbuser      dbpass        calibration
-Use-CaLib:      a2calib.online.a2.kph   calib    calib       basel10       Compton_2012_12
-#
+Use-CaLib:      a2calib.online.a2.kph   calib    calib       basel10       ETAP_Aug_12
 #
 # miscellaneous calibrations    # target position  (0=off/1=on)
-Use-CaLib-Misc:                 1
+Use-CaLib-Misc:                 0
 # tagger calib:     time  (0=off/1=on)
 Use-CaLib-TAGG:     1
 # CB calib:         energy  time    timewalk    quadr. energy  (0=off/1=on)
-Use-CaLib-CB:       1       1       1           1
+Use-CaLib-CB:       1       1       0           1
 # TAPS calib:       energy  time    quadr. energy   LED thr.  (0=off/1=on)
 Use-CaLib-TAPS:     0       1       0               0
 # PID calib:        phi     droop   energy  time  (0=off/1=on)
@@ -27,9 +26,11 @@ Use-CaLib-PID:      1       0       0       1
 # Veto calib:       energy  time  (0=off/1=on)
 Use-CaLib-Veto:     0       1
 
-#Use-CaLib-CBEnergyPerRun: 	data/CBEnergyCorrectionPerRun.txt
-RootTree-Output-Folder:         ~/
-RootTree-File-Name:		RootTree
+Use-CaLib-CBEnergyPerRun:	data/CBEnergyCorrectionPerRun.txt
+
+
+RootTree-Output-Folder:         ~/result
+RootTree-File-Name:		RawTree
 
 Initialise:
 

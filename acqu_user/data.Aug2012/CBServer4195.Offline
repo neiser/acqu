@@ -17,7 +17,7 @@ Input-Streams:	1		32768		0
 ## Optional directory spec. If not specified File-Names must contain the full
 ## directory path
 #File-Directory: 	scratch/august.2012/
-File-Directory: 	scratch/4195/
+File-Directory: 	scratch/
 #File-Directory:		/data/RAID0_datastore/ott/2012_08_EPT/runs/
 #File-Directory:		/daten/august.2012/
 ##
@@ -31,6 +31,61 @@ Stream-Spec:	File	Mk1	0	32768	32	0	400
 ## Now the list of data files to analyse
 ##		File Name	1st rec	Last rec
 ##
+File-Name:	CB_41900.dat	0	0
+File-Name:	CB_41901.dat	0	0
+File-Name:	CB_41902.dat	0	0
+File-Name:	CB_41903.dat	0	0
+File-Name:	CB_41904.dat	0	0
+File-Name:	CB_41905.dat	0	0
+File-Name:	CB_41906.dat	0	0
+File-Name:	CB_41907.dat	0	0
+File-Name:	CB_41908.dat	0	0
+File-Name:	CB_41909.dat	0	0
+#
+File-Name:	CB_41910.dat	0	0
+File-Name:	CB_41911.dat	0	0
+File-Name:	CB_41912.dat	0	0
+File-Name:	CB_41913.dat	0	0
+File-Name:	CB_41914.dat	0	0
+File-Name:	CB_41915.dat	0	0
+File-Name:	CB_41916.dat	0	0
+File-Name:	CB_41917.dat	0	0
+File-Name:	CB_41918.dat	0	0
+File-Name:	CB_41919.dat	0	0
+#
+File-Name:	CB_41920.dat	0	0
+File-Name:	CB_41921.dat	0	0
+File-Name:	CB_41922.dat	0	0
+File-Name:	CB_41923.dat	0	0
+File-Name:	CB_41924.dat	0	0
+File-Name:	CB_41925.dat	0	0
+File-Name:	CB_41926.dat	0	0
+File-Name:	CB_41927.dat	0	0
+File-Name:	CB_41928.dat	0	0
+File-Name:	CB_41929.dat	0	0
+#
+File-Name:	CB_41930.dat	0	0
+File-Name:	CB_41931.dat	0	0
+File-Name:	CB_41932.dat	0	0
+File-Name:	CB_41933.dat	0	0
+File-Name:	CB_41934.dat	0	0
+File-Name:	CB_41935.dat	0	0
+File-Name:	CB_41936.dat	0	0
+File-Name:	CB_41937.dat	0	0
+File-Name:	CB_41938.dat	0	0
+File-Name:	CB_41939.dat	0	0
+#
+File-Name:	CB_41940.dat	0	0
+File-Name:	CB_41941.dat	0	0
+File-Name:	CB_41942.dat	0	0
+File-Name:	CB_41943.dat	0	0
+File-Name:	CB_41944.dat	0	0
+File-Name:	CB_41945.dat	0	0
+File-Name:	CB_41946.dat	0	0
+File-Name:	CB_41947.dat	0	0
+File-Name:	CB_41948.dat	0	0
+File-Name:	CB_41949.dat	0	0
+#
 File-Name:	CB_41950.dat	0	0
 File-Name:	CB_41951.dat	0	0
 File-Name:	CB_41952.dat	0	0
