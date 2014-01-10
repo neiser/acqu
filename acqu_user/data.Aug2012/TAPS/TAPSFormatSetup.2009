@@ -1,0 +1,104 @@
+##-----------------------------------------------------------------------
+##--Author	JRM Annand   21st Feb 2004
+##--Update	JRM Annand...17th Apr 2008 PbWO4 inner ring
+##--Description
+##                *** Acqu++ <-> Root ***
+## Online/Offline Analysis of Sub-Atomic Physics Experimental Data 
+##
+## Parameter File: TAPSFormatSetup.dat
+## ADC/Scaler info for TAPS @ CB-MAMI 2004
+##
+##-----------------------------------------------------------------------
+## Number of Input streams (sources of data), Record length to write data
+## and switch 0/1 = no/yes to control data write
+##	#ADC	#Scaler
+Totals:	0	0
+##
+##	Event ID markers in Mk1 and TAPS data streams
+##	Type	name	ADC(merge)	ADC'	amin	amax	bits
+Module: adc	BP	400		400	0	0	16
+Module: adc	BP	29000		401	0	0	16
+##
+## TAPS block A
+Module:	adc	LGS	20001		0000	0	63	12
+Module:	adc	SGS	20101		0064	0	63	12
+Module:	adc	LG	20201		0128	0	63	12
+Module:	adc	SG	20301		0192	0	63	12
+Module: adc	TAC	20401		0256	0	63	12
+Module: adc	BP	20501		0320	0	63	16
+##
+## TAPS block B
+Module:	adc	LGS	21001		0384	0	63	12
+Module:	adc	SGS	21101		0448	0	63	12
+Module:	adc	LG	21201		0512	0	63	12
+Module:	adc	SG	21301		0576	0	63	12
+Module: adc	TAC	21401		0640	0	63	12
+Module: adc	BP	21501		0704	0	63	16
+##
+## TAPS block C
+Module:	adc	LGS	22001		0768	0	63	12
+Module:	adc	SGS	22101		0832	0	63	12
+Module:	adc	LG	22201		0896	0	63	12
+Module:	adc	SG	22301		0960	0	63	12
+Module: adc	TAC	22401		1024	0	63	12
+Module: adc	BP	22501		1088	0	63	16
+##
+## TAPS block D
+Module:	adc	LGS	23001		1152	0	63	12
+Module:	adc	SGS	23101		1216	0	63	12
+Module:	adc	LG	23201		1280	0	63	12
+Module:	adc	SG	23301		1344	0	63	12
+Module: adc	TAC	23401		1408	0	63	12
+Module: adc	BP	23501		1472	0	63	16
+##
+## TAPS block E
+Module:	adc	LGS	24001		1536	0	63	12
+Module:	adc	SGS	24101		1600	0	63	12
+Module:	adc	LG	24201		1664	0	63	12
+Module:	adc	SG	24301		1728	0	63	12
+Module: adc	TAC	24401		1792	0	63	12
+Module: adc	BP	24501		1856	0	63	16
+##
+## TAPS block F
+Module:	adc	LGS	25001		1920	0	63	12
+Module:	adc	SGS	25101		1984	0	63	12
+Module:	adc	LG	25201		2048	0	63	12
+Module:	adc	SG	25301		2112	0	63	12
+Module: adc	TAC	25401		2176	0	63	12
+Module: adc	BP	25501		2240	0	63	16
+##
+## TAPS Veto A-B
+Module:	adc	LGS	26001		2304	0	127	12
+Module: adc	TAC	26301		2432	0	127	12
+Module: adc	BP	26501		2560	0	127	16
+#
+## TAPS Veto C-D
+Module:	adc	LGS	27001		2688	0	127	12
+Module: adc	TAC	27301		2816	0	127	12
+Module: adc	BP	27501		2944	0	127	16
+#
+## TAPS Veto E-F
+Module:	adc	LGS	28001		3072	0	127	12
+Module: adc	TAC	28301		3200	0	127	12
+Module: adc	BP	28501		3328	0	127	16
+#
+## TAPS Inner Ring PbWO4...extended to 72 channels 2009
+Module:	adc	QDCH	30001		3456	0	75	12
+Module: adc	QDCL	30101		3532	0	75	12
+Module: adc	TDC	30200		3608	0	150	14
+## TAPS New Vetos 2009
+Module:	adc	QDCH	30401		3759	0	18	12
+Module: adc	QDCL	30501		3778	0	18	12
+Module: adc	TDC	30600		3797	0	150	14
+##
+##Module: adc	CNT	30901		3648	0	127	16
+##
+## For each TAPS BaF2 block...
+## LGS (QDC Long Gate Sensitive)       001-064
+## SGS (QDC Short Gate Sensitive)      101-164
+## LG  (QDC Long Gate)                 201-264   
+## SG  (QDC Short Gate)                301-364
+## TAC (TDC)                           401-464
+## BP  (Hits Bit pattern)              501-564
+##
+## END

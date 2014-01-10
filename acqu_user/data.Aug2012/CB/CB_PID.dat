@@ -1,0 +1,92 @@
+##--Author	JRM Annand   29th Apr 2003
+##--Update	JRM Annand...17th Dec 2005
+##--Description
+##                *** Acqu++ <-> Root ***
+## Online/Offline Analysis of Sub-Atomic Physics Experimental Data 
+##
+## Parameter File: CB.dat (specified in CBanalysis.dat)
+## or equivalent
+## Setup analysis of the Crystal Ball TA2CrystalBall apparatus
+## This one sets up an analysis of the Crystal_Ball NaI(Tl) array
+## the inner Particle ID Detector and 2-layer MWPC
+##
+##-----------------------------------------------------------------------
+##
+## Specify list of detectors which constitute the Crystal Ball apparatus
+##	  Name       Class Name      Setup file
+Detector: NaI        TA2CalArray    data/CB/NaI.dat
+Detector: PID        TA2PlasticPID  data/PID/PID.dat
+##
+## Data reconstruction method for Crystal Ball 
+Reconstruct:
+##
+## PDG database	# particles
+ParticleID: 	64
+##
+##
+## Do some post-initialisation.
+## Should usually be done before display is setup
+Initialise:
+##
+## Angle-difference limits (in deg.)  for hits correlation
+##              PID	MWPC
+Misc: AngleLimits 20.0 15.0 10.0
+##
+##
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Allows an overall time adjustment of PID timing
+Misc: PIDTimeShift 0.0
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#Allows an overall position shift for CB NaI crystals
+#May be useful for misaligned target positions
+Misc: PosShift +0.0 +0.0 +0.0
+#- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+##
+##
+#DeltaE-E cuts for PID/NaI
+Misc: PIDCuts 48
+#Options are:
+#1. PID element this cut is used for
+#2. PDG ID of particle, if DeltaE-E is inside the cut region
+#3. Name of cut, cuts can be reused for multiple PID elements
+#4. ROOT file containing the cut, files can be reused for multiple PID elements
+#            1. 2.   3.        4.
+##
+## Histograms of apparatus-level variables
+## histogram name should be preceeded by 1D or 2D (for dimension of spectrum)
+#Display: 2D PID_Hits 24 0 24 -1              NaI_ClPhi 180 -180 180 -1
+#
+#Display: 2D Echarged 100 0 500 0    DeltaE 200 0 20 0
+#Display: 2D Echarged 100 0 500 1    DeltaE 200 0 20 1
+#Display: 2D Echarged 100 0 500 2    DeltaE 200 0 20 2
+#Display: 2D Echarged 100 0 500 3    DeltaE 200 0 20 3
+#Display: 2D Echarged 100 0 500 4    DeltaE 200 0 20 4
+#Display: 2D Echarged 100 0 500 5    DeltaE 200 0 20 5
+#Display: 2D Echarged 100 0 500 6    DeltaE 200 0 20 6
+#Display: 2D Echarged 100 0 500 7    DeltaE 200 0 20 7
+#Display: 2D Echarged 100 0 500 8    DeltaE 200 0 20 8
+#Display: 2D Echarged 100 0 500 9    DeltaE 200 0 20 9
+#Display: 2D Echarged 100 0 500 10   DeltaE 200 0 20 10
+#Display: 2D Echarged 100 0 500 11   DeltaE 200 0 20 11
+#Display: 2D Echarged 100 0 500 12   DeltaE 200 0 20 12
+#Display: 2D Echarged 100 0 500 13   DeltaE 200 0 20 13
+#Display: 2D Echarged 100 0 500 14   DeltaE 200 0 20 14
+#Display: 2D Echarged 100 0 500 15   DeltaE 200 0 20 15
+#Display: 2D Echarged 100 0 500 16   DeltaE 200 0 20 16
+#Display: 2D Echarged 100 0 500 17   DeltaE 200 0 20 17
+#Display: 2D Echarged 100 0 500 18   DeltaE 200 0 20 18
+#Display: 2D Echarged 100 0 500 19   DeltaE 200 0 20 19
+#Display: 2D Echarged 100 0 500 20   DeltaE 200 0 20 20
+#Display: 2D Echarged 100 0 500 21   DeltaE 200 0 20 21
+#Display: 2D Echarged 100 0 500 22   DeltaE 200 0 20 22
+#Display: 2D Echarged 100 0 500 23   DeltaE 200 0 20 23
+#
+#
+#Display: 1D ECentral 20 0 1. 0 23
+#Display: 3D Echarged 100 0 500 0 DeltaEdouble 100 0 5 0 ECentral 20 0 1. 0
+#
+#Display: 1D DeltaTheta 50  0   50 -1
+#Display: 1D DeltaPhi   100 -50 50 0 23
+

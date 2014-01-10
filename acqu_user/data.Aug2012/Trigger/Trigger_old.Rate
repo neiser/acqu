@@ -1,0 +1,13 @@
+##	Scaler time dependence config file
+##	JRM Annand	 15th Jul 2007
+##
+##	Ratios of scalers as a function of time
+Number-Rates: 5
+##	     Name	Scaler	Clock	Frequency	Normalisation
+RateData: ScP2Tagger	151	327	1		100.
+RateData: ScInt4	142	534	1		1000000.
+RateData: ScLiveTime	535	534	1		100.
+RateData: ScG175	327	534	1		1000.
+RateData: ScP2Faraday 	151	150	1		10.
+##
+##	End
