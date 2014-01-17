@@ -86,6 +86,4 @@ SplitScaler: 2 128 540
 ##
 ## Online running...setup of data server
 ## This is ignored for offline running and may be left in
-ServerSetup: data/CBServer4195.Offline
-#ServerSetup: data/CBServer41940_42399.Offline
-#ServerSetup: data/CBServerAll.Offline
+ServerSetup: data/CBServerTest.Offline
