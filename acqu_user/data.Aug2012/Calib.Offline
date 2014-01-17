@@ -46,7 +46,7 @@ Branch:	  Mk1_Header            2097152
 #TreeFile: 
 ##
 ## Directory to save any created ROOT files (include final / )
-Directory: /home/ott/result/calibration/out/
+Directory: /home/steffen/result/calibration/out/
 ##
 ## Manual setup of ADC, Scaler, bits-in-ADC numbers
 ## Usually needed only where experiment header information is not given

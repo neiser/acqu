@@ -18,7 +18,7 @@ Input-Streams:	1		32768		0
 ## directory path
 #File-Directory: 	scratch/august.2012/
 #File-Directory: 	scratch/out/
-File-Directory:		/data/RAID0_datastore/ott/2012_08_EPT/
+File-Directory:		/home/steffen/a2/data/
 ##
 ## Specify each input stream
 ## From disk file, ACQU (Mk1) format, save any output to file (save=1)
