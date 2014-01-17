@@ -223,7 +223,7 @@ void  ARSocket_t::PrintError( const Char_t* message, Int_t level )
 {
   // TA2System print error message with optional program exit if fatal
 
-  if( !fSys ) printf( message );
+  if( !fSys ) puts( message );
   else fSys->PrintError( "", message, level );
 }
 
