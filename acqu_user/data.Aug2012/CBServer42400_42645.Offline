@@ -18,7 +18,7 @@ Input-Streams:	1		32768		0
 ## directory path
 #File-Directory: 	scratch/august.2012/
 #File-Directory: 	scratch/out/
-File-Directory:		/home/steffen/a2/data/
+File-Directory:		scratch/runs/
 ##
 ## Specify each input stream
 ## From disk file, ACQU (Mk1) format, save any output to file (save=1)

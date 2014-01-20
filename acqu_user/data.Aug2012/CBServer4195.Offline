@@ -17,7 +17,7 @@ Input-Streams:	1		32768		0
 ## Optional directory spec. If not specified File-Names must contain the full
 ## directory path
 #File-Directory: 	scratch/august.2012/
-File-Directory: 	/home/steffen/a2/data/runs/
+File-Directory: 	scratch/runs/
 #File-Directory:		/data/RAID0_datastore/ott/2012_08_EPT/runs/
 #File-Directory:		/daten/august.2012/
 ##
