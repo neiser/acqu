@@ -53,9 +53,9 @@ BitPattern:  data/Trigger/Trigger.Pat
 ## Raw analysis may be performed without Apparati
 ##              Name            Class           	Setup file
 #Apparatus:      Misc	        TA2GenericApp  		data/Trigger/TrigMisc.13.07.07
-#Apparatus:      TAGG            TA2Tagger   	    data/Tagger/EPTagger.dat
-#Apparatus:      CB              TA2CentralApparatus	data/CB/CB_PID.dat
-#Apparatus:      TAPS            TA2Taps  			data/TAPS/TAPS.dat
+Apparatus:      TAGG            TA2Tagger   	    data/Tagger/EPTagger.dat
+Apparatus:      CB              TA2CentralApparatus	data/CB/CB_PID.dat
+Apparatus:      TAPS            TA2Taps  			data/TAPS/TAPS.dat
 ##
 ## Turn on apparatus-level reconstruction
 Reconstruct-Analysis:
@@ -63,7 +63,7 @@ Reconstruct-Analysis:
 ## Specify physics analysis
 ##			Name	Class		Config File
 #Physics-Analysis:       MyCaLib     TA2MyCaLib     data/MyCaLib.dat
-#Physics-Analysis:        GoAT     	 TA2GoAT		data/AR-Analysis-GoAT.dat
+Physics-Analysis:        GoAT     	 TA2GoAT		data/AR-Analysis-GoAT.dat
 #Physics-Analysis:       MyAnalysis  TA2MyAnalysis  data/Dec2012/MyAnalysis.dat
 ##
 ## Do some post initialisation...usually necessary

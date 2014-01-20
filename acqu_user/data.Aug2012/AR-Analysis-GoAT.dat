@@ -29,7 +29,7 @@ Use-CaLib-Veto:     0       1
 Use-CaLib-CBEnergyPerRun:	data/CBEnergyCorrectionPerRun.txt
 
 
-RootTree-Output-Folder:         /home/steffen/a2/result
+RootTree-Output-Folder:         /home/steffen/a2/result/
 RootTree-File-Name:		RawTree
 
 Initialise:
