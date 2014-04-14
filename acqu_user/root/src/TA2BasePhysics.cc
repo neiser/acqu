@@ -191,7 +191,7 @@ void TA2BasePhysics::PostInit()
   //Call default PostInit()
   TA2AccessSQL::PostInit();
 
-  //Int_t nChilds;
+  Int_t nChilds;
   
   //'Permutations:' line in configuration file gives maximum number of particles to be processed
   nBeam = fNpermutation[0]; //Tagger

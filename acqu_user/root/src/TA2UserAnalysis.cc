@@ -39,37 +39,43 @@
 #include "TA2MyClusterCalib.h"
 #include "TA2MyRateEstimation.h"
 #include "TA2TAPSAnalysis.h"
+// My physics classes
 #include "TA2GeomCalibPhysics.h"
+#include "TA2TotCSPhysics.h"
+#include "TA2TestEGPhysics.h"
 
 // Recognised apparatus classes.
 // The "standard" set is held in TA2Analysis
-enum { 
-  EA2Calorimeter,
-  EA2Tagger,
-  EA2CosmicCal,
-  EA2CrystalBall,
-  EA2CB,
-  EA2Taps,
-  EA2CentralApparatus,
-  EA2GenericApp,
-  EA2BeamPolMon,
-  EA2Physics,
-  EA2UserPhysics,
-  EA2MesonPhysics,
-  EA2AccessSQL,
-  EA2GoAT,
-  EA2BasePhysics,
-  EA2TriggerPhysics,
-  EA2Pi0Compton,
-  EA2MyCrystalBall, 
-  EA2MyTAPS,
-  EA2MyAnalysis, 
-  EA2MyCalibration, 
-  EA2MyCaLib, 
-  EA2MyClusterCalib, 
-  EA2MyRateEstimation,
-  EA2GeomCalibPhysics,
-  EA2TAPSAnalysis };
+enum { EA2Calorimeter,
+       EA2Tagger,
+       EA2CosmicCal,
+       EA2CrystalBall,
+       EA2CB,
+       EA2Taps,
+       EA2CentralApparatus,
+       EA2GenericApp,
+       EA2BeamPolMon,
+       EA2Physics,
+       EA2UserPhysics,
+       EA2MesonPhysics,
+       EA2BasePhysics,
+       EA2TriggerPhysics,
+       EA2Pi0Compton,
+       EA2MyCrystalBall, 
+       EA2MyTAPS,
+       EA2MyAnalysis, 
+       EA2MyCalibration, 
+       EA2MyCaLib, 
+       EA2MyClusterCalib, 
+       EA2MyRateEstimation,
+       // my physics classes
+       EA2GeomCalibPhysics,
+       EA2TotCSPhysics,
+       EA2TestEGPhysics,
+       EA2AccessSQL,
+       EA2GoAT,
+       EA2TAPSAnalysis,
+};
 
 static const Map_t kKnownChild[] =
 {
@@ -100,6 +106,8 @@ static const Map_t kKnownChild[] =
   {"TA2MyCaLib",          EA2MyCaLib},
   {"TA2MyClusterCalib",   EA2MyClusterCalib},
   {"TA2MyRateEstimation", EA2MyRateEstimation},
+  {"TA2TotCSPhysics",     EA2TotCSPhysics},
+  {"TA2TestEGPhysics",    EA2TestEGPhysics},
   {"TA2TAPSAnalysis",     EA2TAPSAnalysis},
   {NULL,                  -1}
 };
@@ -202,6 +210,12 @@ TA2DataManager* TA2UserAnalysis::CreateChild(const char* name, Int_t a)
   case EA2GeomCalibPhysics:
     // Geometrical calibration for the TA2Mwpc and TA2CentralApparatus
     return new TA2GeomCalibPhysics( name, this );
+  case EA2TotCSPhysics:
+    // Total photoabsorption cross section analysis
+    return new TA2TotCSPhysics( name, this );
+  case EA2TestEGPhysics:
+    // Test the E-G data taking
+    return new TA2TestEGPhysics( name, this );
   case EA2TAPSAnalysis:
     // TAPS analysis
     return new TA2TAPSAnalysis( name, this );

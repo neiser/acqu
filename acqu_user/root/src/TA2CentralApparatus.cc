@@ -1419,7 +1419,7 @@ void TA2CentralApparatus::Test(Bool_t WantDisplay)
     
     
     // PID
-    Double_t xpid[50], ypid[50];
+    Double_t xpid[50], ypid[50], zpid[50];
     
     if (fVerbose>0) {
       cout << "++++++++++++++++ PID ++++++++++++++++" << endl;
@@ -1455,6 +1455,7 @@ void TA2CentralApparatus::Test(Bool_t WantDisplay)
     // check on wire clusters
     TMarker *w[2][20];
     TMarker *inter[2][20], *inter_yz[2][20], *inter_xz[2][20];
+    TMarker *mwpc[2][20], *mwpc_yz[2][20], *mwpc_xz[2][20];
     Double_t phiwire[2][20], xwire[2][20], ywire[2][20];
     Double_t xint[2][20], yint[2][20], zint[2][20];
     Double_t xtrk[2][20], ytrk[2][20], ztrk[2][20];
@@ -1750,7 +1751,7 @@ void TA2CentralApparatus::Test(Bool_t WantDisplay)
     
     
     // PID
-    Double_t xpid[50], ypid[50];
+    Double_t xpid[50], ypid[50], zpid[50];
     
     if (fVerbose>0) {
       cout << "++++++++++++++++ PID ++++++++++++++++" << endl;
@@ -1786,6 +1787,7 @@ void TA2CentralApparatus::Test(Bool_t WantDisplay)
     // check on wire clusters
     TMarker *w[2][20];
     TMarker *inter[2][20], *inter_yz[2][20], *inter_xz[2][20];
+    TMarker *mwpc[2][20], *mwpc_yz[2][20], *mwpc_xz[2][20];
     Double_t phiwire[2][20], xwire[2][20], ywire[2][20];
     Double_t xint[2][20], yint[2][20], zint[2][20];
     Double_t xtrk[2][20], ytrk[2][20], ztrk[2][20];

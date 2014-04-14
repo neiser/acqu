@@ -53,3 +53,6 @@ endif()
 
 # doxygen stuff
 include(cmake/doxygen.cmake)
+
+# root htmldoc
+include(cmake/roothtml.cmake)

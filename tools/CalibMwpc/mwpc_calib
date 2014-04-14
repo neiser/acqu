@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#_______________________________________________________________________
+runCalib()
+{
+  AcquRoot --batch CylMwpc.Offline
+  hadd -f nsummed.root AR*.root
+  root -l -b -q Automatic_Calibration.C"($1)"
+}
+
+#_______________________________________________________________________
+
+# Creating mwpc_params.dat with zeros...
+cat > mwpc_params.dat << EOF
+0       0       0       0       0       0       0       0       0       0       0       0       0       0
+0       0       0       0       0       0       0       0       0       0       0       0       0       0
+EOF
+
+# Run calibs
+list_calibs="0 0 1 1 1 3 4 5"
+for i in ${list_calibs}
+do
+  runCalib $i
+done

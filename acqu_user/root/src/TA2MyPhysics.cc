@@ -852,7 +852,7 @@ void TA2MyPhysics::PostInit()
     //CBEnergy Correction per run
     if(CBEnergyPerRunCorrection)
 	{
-		for(int i=0; i<(int)(fNaI->GetNelement()); i++)
+		for(int i=0; i<fNaI->GetNelement(); i++)
 		{
 			fNaI->GetElement(i)->SetA1(CBEnergyPerRunCorrectionFactor * (fNaI->GetElement(i)->GetA1()));
 		}
