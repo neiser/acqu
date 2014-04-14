@@ -27,9 +27,9 @@
 
 #include "TA2PlasticPID.h"
 #include "TA2CalArray.h"
-#include "TA2CylMWPC.h"
+#include "TA2CylMwpc.h"
 
-class TA2CylMWPC;
+class TA2CylMwpc;
 
 enum { ECBNullPartner = -999999 };
 
@@ -39,7 +39,7 @@ class TA2CrystalBall : public TA2Apparatus
   TA2ClusterDetector* fNaI;    // Pointer to NaI array
   TA2Particle* fParticle;      // Pointer to TA2Particle array
   TA2Detector* fPID;           // Pointer to PID
-  TA2CylMWPC*  fMWPC;          // Pointer to MWPC
+  TA2CylMwpc*  fMWPC;          // Pointer to MWPC
   Double_t*    fPIDdPhi;       // PID-CB Phi differences
   Double_t     fMaxPIDdPhi;    // Max PID-CB Phi difference
   Double_t*    fMWPCdTheta;    // PID-CB Phi differences
@@ -74,7 +74,7 @@ class TA2CrystalBall : public TA2Apparatus
 
   TA2ClusterDetector* GetNaI()      { return fNaI; }
   TA2Detector*        GetPID()      { return fPID; }
-  TA2CylMWPC*         GetMWPC()     { return fMWPC; }
+  TA2CylMwpc*         GetMWPC()     { return fMWPC; }
   Int_t               GetNCharged() { return fNCharged;}
   Double_t*           GetDeltaE()   { return fDeltaE; }
   Double_t            GetCBMeanTime();

@@ -1,4 +1,3 @@
-// SVN info: $Id: TA2MwpcIntersection.h 14 2011-06-16 13:00:23Z mushkar $
 #ifndef __TA2MwpcIntersection_h__
 #define __TA2MwpcIntersection_h__
 

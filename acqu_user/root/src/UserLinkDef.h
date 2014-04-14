@@ -59,14 +59,10 @@
 #pragma link C++ class TA2CalArray+;
 #pragma link C++ class TA2TAPS_BaF2+;
 #pragma link C++ class TA2TAPS_Veto+;
-#pragma link C++ class TA2CylMWPC+;
 #pragma link C++ class TA2FPMicro;
 #pragma link C++ class TA2PairSpec+;
 #pragma link C++ class TA2Moeller+;
 // Utility classes...components of detectors etc
-#pragma link C++ class TA2CylStripSven+;
-#pragma link C++ class TA2CylWireSven+;
-#pragma link C++ class TA2WCLayerSven+;
 #pragma link C++ class TA2Event+;
 #pragma link C++ class TA2KFParticle+;
 #pragma link C++ class TA2CBKinematicFitter+;
@@ -77,5 +73,7 @@
 #pragma link C++ class TA2CentralTrack++;
 #pragma link C++ class TA2TrackLine++;
 #pragma link C++ class TA2MwpcIntersection++;
+#pragma link C++ class TA2GeomCalibPhysics+;
+#pragma link C++ class TA2CylMwpcLayer+;
 
 #endif

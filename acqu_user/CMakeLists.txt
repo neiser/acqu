@@ -8,7 +8,7 @@ include_directories("root/src" "root/src-mc" ${ACQU_USER_INCS})
 set(MOD "UserRoot")
 ROOT_PREPARE_LIB("root/src" "root/src" "root/src/UserLinkDef.h" "root/src/UserDict.cc" SRCS EXESRCS)
 add_library("lib${MOD}" SHARED ${SRCS})
-target_link_libraries("lib${MOD}" ${ROOT_LIBRARIES} ${ACQU_USER_LIBS})
+target_link_libraries("lib${MOD}" ${ROOT_LIBRARIES} ${ACQU_USER_LIBS} Minuit)
 set_target_properties("lib${MOD}" PROPERTIES LIBRARY_OUTPUT_NAME ${MOD})
 
 

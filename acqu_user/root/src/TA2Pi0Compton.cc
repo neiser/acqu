@@ -450,8 +450,8 @@ void TA2Pi0Compton::Reconstruct()
 {
 // Get # of Particles from detectors
 
-	fTAGGNParticle 		= fTAGG->GetNparticle();	
-	fCBNParticle 		= fCB->GetNparticle();
+	fTAGGNParticle 		= fTAGG->GetNparticle();
+	fCBNParticle 		= fCB->GetNParticle();
 	if (fTAPS) 					
 	fTAPSNParticle		= fTAPS->GetNparticle(); 
 	else fTAPSNParticle 	= 0;

@@ -1,4 +1,3 @@
-// SVN info: $Id: TA2CylMwpcStrip.cc 71 2011-10-25 17:40:25Z mushkar $
 #include "TA2CylMwpcStrip.h"
 #include "TA2Math.h"
 
@@ -6,7 +5,7 @@ ClassImp(TA2CylMwpcStrip)
 
 //___________________________________________________________________________________________
 TA2CylMwpcStrip::TA2CylMwpcStrip(const char* name, Int_t nelem, Int_t maxclust, Int_t maxclsize, void* det, Double_t* layerparm)
-                :TA2WCLayerSven(name, nelem, maxclust, maxclsize, det )
+                :TA2CylMwpcLayer(name, nelem, maxclust, maxclsize, det )
 {
   // Store dimensions, alignment and correction factors
   

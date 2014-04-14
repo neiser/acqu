@@ -16,7 +16,7 @@
 
 #include "TA2Calorimeter.h"
 
-#include "TA2CylMWPC.h"
+#include "TA2CylMwpc.h"
 #include "TA2PlasticPID.h"
 #include "TA2CalArray.h"
 #include "TA2TAPS_BaF2.h"
@@ -64,7 +64,7 @@ TA2DataManager*  TA2Calorimeter::CreateChild(const char* name, Int_t dclass)
   default:
     return NULL;
   case ECylMWPC:
-    fPTracker = new TA2CylMWPC( name, this );
+    fPTracker = new TA2CylMwpc( name, this );
     return fPTracker;
   case EPlasticPID:
     fPID = new TA2PlasticPID( name, this );

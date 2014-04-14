@@ -4,7 +4,7 @@
 #include "TA2Apparatus.h"              // base apparatus class
 #include "TA2ClusterDetector.h"        // calorimeter array
 
-#include "TA2CylMWPC.h"
+#include "TA2CylMwpc.h"
 #include "TA2PlasticPID.h"
 #include "TA2CalArray.h"
 #include "TA2Particle.h"

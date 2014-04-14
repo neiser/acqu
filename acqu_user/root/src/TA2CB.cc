@@ -58,7 +58,7 @@ TA2DataManager* TA2CB::CreateChild(const char* name, Int_t dclass)
    default:
     return NULL;
    case ECylMWPC:
-    fTracker = new TA2CylMWPC(name, this);
+    fTracker = new TA2CylMwpc(name, this);
     return fTracker;
    case EPlasticPID:
     fPID = new TA2PlasticPID(name, this);
@@ -256,9 +256,9 @@ Bool_t TA2CB::MakeTrack(TLorentzVector* fP4)
   fThetaCB = fP4->Theta();
 
   //Get WC stuff
-  nTracks = ((TA2CylMWPC*)fTracker)->GetNTrack();
-  fPhiWC = ((TA2CylMWPC*)fTracker)->GetTrackPhi();
-  fThetaWC = ((TA2CylMWPC*)fTracker)->GetTrackTheta();
+  nTracks = ((TA2CylMwpc*)fTracker)->GetNTrack();
+  fPhiWC = ((TA2CylMwpc*)fTracker)->GetTrackPhi();
+  fThetaWC = ((TA2CylMwpc*)fTracker)->GetTrackTheta();
 
   //Test with all MWPC tracks and find minimum
   iMin = 0;

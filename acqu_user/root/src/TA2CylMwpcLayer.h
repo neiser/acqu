@@ -1,36 +1,25 @@
-//--Author      V Lisin      28th Jun 2004  original DAPHNE fortran -> C
-//--Update      JRM Annand... 8th Jul 2004  AcquRoot C++ class
-//--Description
-//                *** Acqu++ <-> Root ***
-// Online/Offline Analysis of Sub-Atomic Physics Experimental Data
-//
-// TA2WCLayer
-//
-// General methods for single layer wire chamber
-//
-
-#ifndef __TA2WCLayerSven_h__
-#define __TA2WCLayerSven_h__
+#ifndef __TA2CylMwpcLayer_h__
+#define __TA2CylMwpcLayer_h__
 
 #include "TA2WCLayer.h"
 
 #define MARKED 32767
 
-class TA2WCLayerSven : public TA2WCLayer {
+class TA2CylMwpcLayer : public TA2WCLayer {
  protected:
 
  public:
-  TA2WCLayerSven(const char*, Int_t, Int_t, Int_t, void*); // Normal use
+  TA2CylMwpcLayer(const char*, Int_t, Int_t, Int_t, void*); // Normal use
   virtual Int_t GetNElement() {return fNElement;}
   virtual Int_t GetNHits() {return fNHits;}
   virtual Int_t* GetHits() {return fHits;}
   virtual Int_t GetMaxClust() {return fMaxClust;}
   virtual void DecodeCluster( Int_t&, Int_t** );
-  ClassDef(TA2WCLayerSven,1)
+  ClassDef(TA2CylMwpcLayer,1)
 };
 
-//---------------------------------------------------------------------------
-inline void TA2WCLayerSven::DecodeCluster( Int_t& nHit, Int_t** phit )
+//________________________________________________________________________
+inline void TA2CylMwpcLayer::DecodeCluster( Int_t& nHit, Int_t** phit )
 {
   fIdist = 2;
 
@@ -64,17 +53,36 @@ inline void TA2WCLayerSven::DecodeCluster( Int_t& nHit, Int_t** phit )
 
   //----------------------------------------------------------------------------
   //This is Sven's rewritten cluster algorithm for strips/wires
-  Int_t Temp[nh+2];
+  Int_t Temp[nh+nh];
   Int_t Cnt;
   Int_t Clr;
-  for(Int_t t=0; t<nh; t++) //Copy hits to a 2nd field for
-    Temp[t] = fLayerHits[t];  //marking connected elements
-  Temp[nh] = Temp[0];   //This "closes the ring"
-  Temp[nh+1] = Temp[1]; //This "closes the ring"
+  //Copy hits to a 2nd field for marking connected elements
+  for(Int_t t=0; t<nh; t++)
+  {
+    Temp[t] = fLayerHits[t];
+  }
 
-  for(Int_t t=0; t<nh-1; t++)                 //In 2nd field, all elements connected to a
-    if(fLayerHits[t+1] - fLayerHits[t]<=fIdist) //previous element are marked. The starting
-      Temp[t+1]=MARKED;                       //element of the cluster stays unmarked.
+  // Find 1st claster after the 1st not hit element
+  Int_t tt;
+  for(tt=1; tt<nh; ++tt)
+  {
+    if( (fLayerHits[tt] - fLayerHits[tt-1]) > fIdist ) break;
+  }
+  
+  // In 2nd field, all elements connected to a previous element are marked. The starting element of the cluster stays unmarked.
+  for (Int_t t=tt; t<nh-1+tt; ++t)
+  {
+    Int_t i0 = (t > (nh-1)) ? t - nh : t;
+    Int_t i1 = (i0 == (nh-1)) ? t - nh + 1 : i0+1;
+    Int_t d = TMath::Abs(fLayerHits[i1] - fLayerHits[i0]);
+    if ( d <= fIdist || d == (fNElement -1) ) Temp[i1]=MARKED;
+  }
+  
+  //
+  for (Int_t t = 0; t<nh; ++t)
+  {
+    Temp[t+nh] = Temp[t];
+  }
 
   Cnt = 0;
   for(Int_t t=0; t<nh; t++) //Count all unmarked (=starting elements of a

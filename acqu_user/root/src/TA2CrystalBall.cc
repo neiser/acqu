@@ -99,7 +99,7 @@ TA2DataManager* TA2CrystalBall::CreateChild(const char* name, Int_t dclass)
     fNaI = new TA2CalArray(name, this);
     return fNaI;
    case ECB_CylMWPC:
-    fMWPC = new TA2CylMWPC(name, this);
+    fMWPC = new TA2CylMwpc(name, this);
     return fMWPC;
    default:
     return NULL;
@@ -293,7 +293,7 @@ void TA2CrystalBall::Reconstruct()
     for( j=0; j<nMWPC; j++ ){
       *diffMWPC++ =
 	TMath::RadToDeg() *
-	fMWPC->GetTrack(j)->GetDirCos()->Angle( *cl->GetMeanPosition() );
+	fMWPC->GetTrack(j)->GetDirCos().Angle( *cl->GetMeanPosition() );
       *ijm++ = i | (j<<16);                     // store i,j indices
     }
   }
@@ -329,7 +329,7 @@ void TA2CrystalBall::Reconstruct()
 
   // Loop over NaI clusters, check for correlated PID and MWPC
   // Store diagnostic variables and do particle ID by dE-E
-  TVector3* trackDir;                            // track direction
+  const TVector3* trackDir;                            // track direction
   for(i=0,l=0; i<nNaI; i++)
   {
     cl = clNaI[idNaI[i]];                         // CB cluster
@@ -377,7 +377,7 @@ void TA2CrystalBall::Reconstruct()
 	if(j!=ECBNullPartner)
         {
 	  fDeltaTheta[l++] = *(fMWPCdTheta + i*nMWPC + j);
-	  trackDir = fMWPC->GetTrack(j)->GetDirCos();
+	  trackDir = fMWPC->GetTrack(j)->GetDirCosPtr();
 	  fParticle[i].SetDetectorA(EDetMWPC);
 	}
       }

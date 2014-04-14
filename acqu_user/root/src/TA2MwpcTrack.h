@@ -1,4 +1,3 @@
-// SVN info: $Id: TA2MwpcTrack.h 14 2011-06-16 13:00:23Z mushkar $
 #ifndef __TA2MwpcTrack_h__
 #define __TA2MwpcTrack_h__
 

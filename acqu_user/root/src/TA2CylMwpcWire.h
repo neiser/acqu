@@ -1,11 +1,10 @@
-// SVN info: $Id: TA2CylMwpcWire.h 15 2011-06-17 01:35:36Z mushkar $
 #ifndef __TA2CylMwpcWire_h__
 #define __TA2CylMwpcWire_h__
 
-#include "TA2WCLayerSven.h"
+#include "TA2CylMwpcLayer.h"
 #include "TA2Math.h"
 
-class TA2CylMwpcWire : public TA2WCLayerSven {
+class TA2CylMwpcWire : public TA2CylMwpcLayer {
   protected:
     Double_t fRadius;		// radius mm
     Double_t fLength;		// length mm
@@ -16,7 +15,7 @@ class TA2CylMwpcWire : public TA2WCLayerSven {
     virtual Double_t GetRadius() const { return fRadius; }
     virtual Double_t GetLength() const { return fLength; }
     
-    ClassDef(TA2CylMwpcWire,1)
+    ClassDef(TA2CylMwpcWire,1) // Wire layer for cylindrical MWPC
 };
 
 //---------------------------------------------------------------------------
@@ -27,8 +26,8 @@ inline void TA2CylMwpcWire::CGCluster(const Int_t ic)
   // Convert wire # to phi
   
   fCGClust[ic] = fPhiSpace * ( fClust[ic] + 0.5*(fLenClust[ic] - 1) );
-  if ( fCGClust[ic] >= 2.*kPi ) fCGClust[ic] -= 2.*kPi; // To-do: May not need!
-  else if ( fCGClust[ic] < 0. ) fCGClust[ic] += 2.*kPi; // To-do: May not need!
+  if ( fCGClust[ic] >= 2.*kPi ) fCGClust[ic] -= 2.*kPi; // TODO May not need!
+  else if ( fCGClust[ic] < 0. ) fCGClust[ic] += 2.*kPi; // TODO May not need!
 }
 
 #endif

@@ -1,11 +1,9 @@
-// SVN info: $Id: TA2Math.h 70 2011-10-19 13:34:30Z mushkar $
 #ifndef __TA2Math_h__
 #define __TA2Math_h__
 
 #include <TMath.h>
 #include <TVector2.h>
 #include <TLorentzVector.h>
-//#include <iostream> // To-do Remove!
 
 // Global constants
 static const Double_t kPi       = TMath::Pi();
@@ -44,8 +42,20 @@ namespace TA2Math {
     r1 = o1 + d1 * t;
     r2 = o2 + d2 * s;
     
-    //
+    // Return the shortest distance beetween the 2 lines
     return (r2-r1).Mag();
+  }
+  
+  //_________________________________________________________________________________________________
+  // Calculate vertex for 2 lines (see DistanceBetweenTwoLines(..))
+  inline TVector3 Vertex(const TVector3 &o1, const TVector3 &d1, const TVector3 &o2, const TVector3 &d2, Double_t &distance)
+  {
+    // The shortest distance beetween the 2 lines
+    TVector3 r1, r2;
+    distance = DistanceBetweenTwoLines(o1, d1, o2, d2, r1, r2);
+    
+    // Return vertex
+    return 0.5*(r1 + r2);
   }
   
   //_________________________________________________________________________________________________

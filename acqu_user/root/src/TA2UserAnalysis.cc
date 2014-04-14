@@ -39,6 +39,7 @@
 #include "TA2MyClusterCalib.h"
 #include "TA2MyRateEstimation.h"
 #include "TA2TAPSAnalysis.h"
+#include "TA2GeomCalibPhysics.h"
 
 // Recognised apparatus classes.
 // The "standard" set is held in TA2Analysis
@@ -67,6 +68,7 @@ enum {
   EA2MyCaLib, 
   EA2MyClusterCalib, 
   EA2MyRateEstimation,
+  EA2GeomCalibPhysics,
   EA2TAPSAnalysis };
 
 static const Map_t kKnownChild[] =
@@ -84,6 +86,7 @@ static const Map_t kKnownChild[] =
   {"TA2MyCrystalBall",    EA2MyCrystalBall},
   {"TA2MyTAPS",           EA2MyTAPS},
   //Physics
+  {"TA2GeomCalibPhysics", EA2GeomCalibPhysics},
   {"TA2Pi0Compton",       EA2Pi0Compton},
   {"TA2Physics",          EA2Physics},
   {"TA2UserPhysics",      EA2UserPhysics},
@@ -196,6 +199,9 @@ TA2DataManager* TA2UserAnalysis::CreateChild(const char* name, Int_t a)
   case EA2MyRateEstimation:
     // rate estimation
     return new TA2MyRateEstimation( name, this );
+  case EA2GeomCalibPhysics:
+    // Geometrical calibration for the TA2Mwpc and TA2CentralApparatus
+    return new TA2GeomCalibPhysics( name, this );
   case EA2TAPSAnalysis:
     // TAPS analysis
     return new TA2TAPSAnalysis( name, this );

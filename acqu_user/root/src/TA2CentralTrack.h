@@ -1,4 +1,3 @@
-// SVN info: $Id: TA2CentralTrack.h 14 2011-06-16 13:00:23Z mushkar $
 #ifndef __TA2CentralTrack_h__
 #define __TA2CentralTrack_h__
 
@@ -9,20 +8,26 @@
 class TA2CentralTrack : public TA2TrackLine {
   protected:
     static const Int_t kNullHit = ENullHit;
-    static const Double_t kNullFloat = ENullFloat;
+    static const Double_t kNullFloat = ENullFloat; // TODO Think better about global consts
     Int_t    fIhitPid;		// Index of a hit in the PID
     Double_t fEhitPid;		// Pulse amplitude of the Pid hit
+    Double_t fEhitPidCorr;	// Corrected pulse amplitude of the Pid hit
     Double_t fThitPid;		// Time of the Pid hit
+    Double_t fPhiPid;		// Phi of the the PID hit
     Int_t    fIintersMwpc[2];	// Indexes of intersections in the internal (0) and external (1) MWPC
     Double_t fEtrackMwpc;	// Sum of MWPCs intersections pulse amplitudes
+    Double_t fEtrackMwpcCorr;   // TODO
+    Double_t fTtrackMwpc;	// TODO
     Double_t fEtrackMwpc0;	// MWPC 0 pulse amplitudes
     Double_t fEtrackMwpc1;	// MWPC 1 pulse amplitudes
-    Double_t fTtrackMwpc;	// To-do
     Int_t    fIclNaI;		// Index of a cluster in the NaI
     Double_t fEclNaI;		// Sum of crystals pulse amplitudes
+    Double_t fEclNaICorr;	// Corrected sum of crystals pulse amplitudes
     Double_t fTclNaI;		// NaI cluster time
     Double_t fMclNaI;		// Size of the NaI cluster
     Double_t fCentralIndexNaI;	// Index of the central crystal in the cluster
+    Double_t fThetaNaI;		// Phi of the the NaI claster
+    Double_t fPhiNaI;		// Phi of the the NaI claster
     Double_t fSigmaTimeNaI;
     Double_t fSigmaEnergyNaI;
     Double_t fSigmaPhiNaI;
@@ -35,18 +40,24 @@ class TA2CentralTrack : public TA2TrackLine {
     void SetTrack(const Int_t, const Int_t, const Int_t, const Int_t, const TVector3&, const TVector3&, const TVector3&);
     void SetIhitPid(const Int_t);
     void SetEhitPid(const Double_t &e) { fEhitPid = e; }
+    void SetEhitPidCorr(const Double_t &e) { fEhitPidCorr = e; }
     void SetThitPid(const Double_t &t) { fThitPid = t; }
+    void SetPhiPid(const Double_t &phi) { fPhiPid = phi; }
     void SetIinterMwpc(const Int_t, const Int_t);
     void SetIintersMwpc(const Int_t, const Int_t);
     void SetEtrackMwpc(const Double_t &e) { fEtrackMwpc = e; }
+    void SetEtrackMwpcCorr(const Double_t &e) { fEtrackMwpcCorr = e; }
     void SetEtrackMwpc0(const Double_t &e) { fEtrackMwpc0 = e; }
     void SetEtrackMwpc1(const Double_t &e) { fEtrackMwpc1 = e; }
     void SetTtrackMwpc(const Double_t &t) { fTtrackMwpc = t; }
     void SetIclNaI(const Int_t);
     void SetEclNaI(const Double_t &e) { fEclNaI = e; }
+    void SetEclNaICorr(const Double_t &e) { fEclNaICorr = e; }
     void SetTclNaI(const Double_t &t) { fTclNaI = t; }
     void SetMclNaI(const Double_t &m) { fMclNaI = m; }
     void SetCentralIndexNaI(const Int_t &i) { fCentralIndexNaI = i; }
+    void SetThetaNaI(const Double_t &theta) { fThetaNaI = theta; }
+    void SetPhiNaI(const Double_t &phi) { fPhiNaI = phi; }
     void SetSigmaTimeNaI(const Double_t &t) { fSigmaTimeNaI = t; }
     void SetSigmaEnergyNaI(const Double_t &e) { fSigmaEnergyNaI = e; }
     void SetSigmaPhiNaI(const Double_t &phi) { fSigmaPhiNaI = phi; }
@@ -54,18 +65,24 @@ class TA2CentralTrack : public TA2TrackLine {
     static Int_t CalcTrackType(const Bool_t, const Bool_t, const Bool_t, const Bool_t);
     Int_t    GetIhitPid() const { return fIhitPid; }
     Double_t GetEhitPid() const { return fEhitPid; }
+    Double_t GetEhitPidCorr() const { return fEhitPidCorr; }
     Double_t GetThitPid() const { return fThitPid; }
+    Double_t GetPhiPid() const { return fPhiPid; }
     Int_t    GetIinterMwpc(const Int_t iCh) const { return fIintersMwpc[iCh]; }
     const Int_t *GetIintersMwpc() const { return fIintersMwpc; }
-    Double_t GetEtrackMwpc()  const { return fEtrackMwpc; }
+    Double_t GetEtrackMwpc() const { return fEtrackMwpc; }
+    Double_t GetEtrackMwpcCorr() const { return fEtrackMwpcCorr; }
     Double_t GetEtrackMwpc0() const { return fEtrackMwpc0; }
     Double_t GetEtrackMwpc1() const { return fEtrackMwpc1; }
     Double_t GetTtrackMwpc() const { return fTtrackMwpc; }
     Int_t    GetIclNaI() const { return fIclNaI; }
     Double_t GetEclNaI() const { return fEclNaI; }
+    Double_t GetEclNaICorr() const { return fEclNaICorr; }
     Double_t GetTclNaI() const { return fTclNaI; }
     Double_t GetMclNaI() const { return fMclNaI; }
     Int_t    GetCentralIndexNaI() const { return fCentralIndexNaI; }
+    Double_t GetThetaNaI() const { return fThetaNaI; }
+    Double_t GetPhiNaI() const { return fPhiNaI; }
     Double_t GetSigmaTimeNaI() const { return fSigmaTimeNaI; }
     Double_t GetSigmaEnergyNaI() const { return fSigmaEnergyNaI; }
     Double_t GetSigmaPhiNaI() const { return fSigmaPhiNaI; }
