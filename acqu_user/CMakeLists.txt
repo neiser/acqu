@@ -15,7 +15,7 @@ set_target_properties("lib${MOD}" PROPERTIES LIBRARY_OUTPUT_NAME ${MOD})
 set(MOD "MCUserRoot")
 ROOT_PREPARE_LIB("root/src-mc" "root/src-mc" "root/src-mc/MCUserLinkDef.h" "root/src-mc/MCDict.cc" SRCS EXESRCS)
 add_library("lib${MOD}" SHARED ${SRCS})
-target_link_libraries("lib${MOD}" ${ROOT_LIBRARIES} libAcquMC libAcquRoot libAcquDAQ)
+target_link_libraries("lib${MOD}" ${ROOT_LIBRARIES} ${ACQU_USER_LIBS})
 set_target_properties("lib${MOD}" PROPERTIES LIBRARY_OUTPUT_NAME ${MOD})
 
 # we add many additional files marked as "headers"

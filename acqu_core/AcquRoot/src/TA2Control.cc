@@ -29,7 +29,9 @@
 #include "TAcquRoot.h"
 #include "TA2Analysis.h"
 #include "TA2DataServer.h"
+#ifndef NO_ACQU_DAQ
 #include "TDAQexperiment.h"
+#endif
 #include "CMakeConfig.h"
 
 
@@ -37,7 +39,9 @@
 TAcquRoot* gAR = NULL;
 TA2Analysis* gAN = NULL;
 TA2DataServer* gDS = NULL;
+#ifndef NO_ACQU_DAQ
 TDAQexperiment* gDAQ = NULL;
+#endif
 TA2Control* gCTRL = NULL;
 
 TA2Control* TA2Control::fExists = NULL;  //Pointer to this interface
@@ -98,6 +102,7 @@ TA2Control::TA2Control( const char* appClassName, int* argc, char** argv,
   // The old method of a separate DataServer program is no longer supported
   //
   if( online ){
+#ifndef NO_ACQU_DAQ
     // Optional local DAQ
     if( gAR->IsLocalDAQ() ){
       gDAQ = 
@@ -107,6 +112,7 @@ TA2Control::TA2Control( const char* appClassName, int* argc, char** argv,
       gDAQ->PostInit();
       gDAQ->StartExperiment();
     }
+#endif
     // TA2DataServer data server input must be setup for online running
     if( gAR->GetDataServerSetup() ){
       gDS = new TA2DataServer("DataServer",gAR);
@@ -143,7 +149,9 @@ TA2Control::~TA2Control()
     if( gAR ) delete gAR;
     if( gAN ) delete gAN;
     if( gDS ) delete gDS;
+#ifndef NO_ACQU_DAQ
     if( gDAQ ) delete gDAQ;
+#endif
   }
 }
 

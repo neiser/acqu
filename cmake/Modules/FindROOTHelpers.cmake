@@ -1,9 +1,14 @@
 # This generates a ROOT dictionary from a LinkDef file by using rootcint
-function (ROOT_GENERATE_DICTIONARY HEADERS LINKDEF_FILE DICTFILE INCLUDE_DIRS)
+function (ROOT_GENERATE_DICTIONARY HEADERS LINKDEF_FILE DICTFILE INCLUDE_DIRS DEFINITIONS)
   # construct -I arguments
   foreach(f ${INCLUDE_DIRS})
     list(APPEND INCLUDE_DIRS_ARGS -I"${f}")   
   endforeach() 
+
+  # construct -D arguments
+  foreach(f ${DEFINITIONS})
+    list(APPEND DEFINITIONS_ARGS -D"${f}")
+  endforeach()
 
   # also add the outfile with extension .h 
   get_filename_component(DICTFILEDIR ${DICTFILE} PATH)
@@ -29,7 +34,7 @@ function (ROOT_GENERATE_DICTIONARY HEADERS LINKDEF_FILE DICTFILE INCLUDE_DIRS)
     ${LDPREFIX}=${ROOT_LIBRARY_DIR}
     ROOTSYS=${ROOTSYS}
     ${ROOT_CINT_EXECUTABLE}
-    -f "${DICTFILE}" -c -p ${INCLUDE_DIRS_ARGS} ${HEADERS} "${LINKDEF_FILE}"
+    -f "${DICTFILE}" -c -p ${INCLUDE_DIRS_ARGS} ${DEFINITIONS_ARGS} ${HEADERS} "${LINKDEF_FILE}"
     DEPENDS ${HEADERS} ${LINKDEF_FILE}
     )
 
@@ -140,15 +145,17 @@ function(ROOT_PREPARE_LIB SOURCEDIRS INCDIRS LINKDEFDIR DICTNAME
         list(APPEND LIBSOURCES ${HEADERS})
       endif()
     endforeach()
-
-    
   endforeach()
-  
+
+  # get current include dirs and definitions,
+  # hand them over to rootcint
   get_property(allincdirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     PROPERTY INCLUDE_DIRECTORIES)
+  get_property(alldefs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+    PROPERTY COMPILE_DEFINITIONS)
 
   ROOT_GENERATE_DICTIONARY("${DICTHEADERS}" "${LINKDEF}"
-    "${DICTIONARY}" "${allincdirs}")
+    "${DICTIONARY}" "${allincdirs}" "${alldefs}")
 
   
   # include the generated Dict in compiling...

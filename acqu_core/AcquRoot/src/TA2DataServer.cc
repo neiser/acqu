@@ -260,6 +260,7 @@ void TA2DataServer::SetConfig( Char_t* line, int key )
 	new TA2FileSource( (Char_t*)"FileSource",recl, save, rsize, swap );
       fIsSortLock = ETrue;
       break;
+#ifndef NO_ACQU_DAQ
     case EDataSrvLocal:
       // DAQ read by same node
       if( (j = sscanf(line,"%*s%*s%*d%d%d%d",
@@ -271,6 +272,7 @@ void TA2DataServer::SetConfig( Char_t* line, int key )
       
       fIsSortLock = EFalse;
       break;
+#endif
     default:
       PrintError( line, "<DataServer unknown file source>", EErrFatal );
     }

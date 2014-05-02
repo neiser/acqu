@@ -38,14 +38,23 @@ endmacro()
 
 # some variables to track and configure
 # the following macro calls
-set(EXTRA_LIBS EG Foam rt)
+set(EXTRA_LIBS EG Foam)
 set(CORE_EXESRCS)
 set(CORE_LIBS)
 
+# treat ACQU_DAQ a bit special to increase portability
+if(ACQU_DAQ)
+  list(APPEND EXTRA_LIBS rt)
+  CompileCoreLib(AcquDAQ "-O0") # AcquDAQ must not be optimized (hardware access gets scrambled)  
+else()
+  add_definitions(-DNO_ACQU_DAQ)
+endif()
 
+# those core libs are always required,
+# but they depend on NO_ACQU_DAQ to be defined!
 CompileCoreLib(AcquRoot)
-CompileCoreLib(AcquDAQ "-O0") # AcquDAQ must not be optimized (hardware access gets scrambled)
 CompileCoreLib(AcquMC)
+
 
 # EPICS/libezca is only included in DAQ mode and if EPICS is found
 # if DAQ, look for EPICS

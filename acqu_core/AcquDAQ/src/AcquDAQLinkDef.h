@@ -22,6 +22,7 @@
 
 //#pragma link C++ global gEXP;
 
+#pragma link C++ class TA2LocalSource+;
 //#pragma link C++ class TDAQsystem+;
 #pragma link C++ class TDAQexperiment+;
 #pragma link C++ class TDAQsupervise+;

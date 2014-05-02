@@ -33,7 +33,9 @@
 R__EXTERN class TAcquRoot*   gAR;         // global ptr to Acqu-Root interface
 R__EXTERN class TA2Analysis*  gAN;        // global ptr to Acqu-Root analyser
 R__EXTERN class TA2DataServer*  gDS;      // global ptr to DataServer
+#ifndef NO_ACQU_DAQ
 R__EXTERN class TDAQexperiment*  gDAQ;    // global ptr to local DAQ
+#endif
 R__EXTERN class TA2Control*  gCTRL;       // global ptr to local application
 
 struct Map_t;

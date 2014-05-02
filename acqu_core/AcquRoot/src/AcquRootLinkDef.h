@@ -22,7 +22,9 @@
 #pragma link C++ global gAR;
 #pragma link C++ global gAN;
 #pragma link C++ global gDS;
+#ifndef NO_ACQU_DAQ
 #pragma link C++ global gDAQ;
+#endif
 #pragma link C++ global gCTRL;
 //
 // Main system classes
@@ -68,7 +70,6 @@
 #pragma link C++ class TA2DataFormat+;
 #pragma link C++ class TA2NetSource+;
 #pragma link C++ class TA2FileSource+;
-#pragma link C++ class TA2LocalSource+;
 #pragma link C++ class TA2Mk1Format+;
 #pragma link C++ class TA2Mk2Format+;
 #pragma link C++ class TA2TAPSFormat+;
