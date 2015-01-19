@@ -11,22 +11,22 @@ Reconstruct:
 #
 
 # General:      dbhost     dbname                  dbuser      dbpass        calibration
-Use-CaLib:      blaster    CaLib_2013_10-Present   calib       basel10       2014-07_EPT_Prod_Neiser      
+#Use-CaLib:      blaster    CaLib_2013_10-Present   calib       basel10       2014-07_EPT_Prod_Neiser      
 #
 #
 # tagger calib:     time    efficiency (0=off/1=on)
-Use-CaLib-TAGG:     1       0
+#Use-CaLib-TAGG:     1       0
 # CB calib:         energy  time    timewalk    quadr. energy    led  (0=off/1=on)
-Use-CaLib-CB:       1       1       0           0                0 
+#Use-CaLib-CB:       1       1       0           0                0 
 # TAPS calib:       energy  time    quadr. energy   LED thr.    CFD thr.  (0=off/1=on)
-Use-CaLib-TAPS:     1       1       0               0           0
+#Use-CaLib-TAPS:     1       1       0               0           0
 # PID calib:        phi     energy  time  (0=off/1=on)
-Use-CaLib-PID:      1       0       1
+#Use-CaLib-PID:      1       0       1
 # Veto calib:       energy  time    LED thr. (0=off/1=on)
-Use-CaLib-Veto:     1       1       0
+#Use-CaLib-Veto:     1       1       0
 
 #Use-CaLib-CBEnergyPerRun: 	data/CBEnergyCorrectionPerRun.txt
-RootTree-Output-Folder:         ~/
+RootTree-Output-Folder:         scratch/
 RootTree-File-Name:		Acqu
 
 # Read in and decode beam helicity ADC
