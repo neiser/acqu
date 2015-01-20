@@ -25,7 +25,7 @@ Use-CaLib-PID:      1       0       1
 # Veto calib:       energy  time    LED thr. (0=off/1=on)
 Use-CaLib-Veto:     1       1       0
 
-RootTree-Output-Folder:         ~/
+RootTree-Output-Folder:         scratch/
 RootTree-File-Name:		Acqu
 
 # Read in and decode beam helicity ADC
