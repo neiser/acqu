@@ -53,7 +53,7 @@ Branch:   mc_rnd_id     8
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #ROOT file(s) (GEANT4 output) to be analysed. Add more lines for more files
 #
-TreeFile: scratch/geant.root
+TreeFile: scratch/steffen-pi0-cluster-geant.root
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
