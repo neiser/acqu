@@ -26,7 +26,8 @@ Use-CaLib-PID:      1       0       1
 # Veto calib:       energy  time    LED thr. (0=off/1=on)
 Use-CaLib-Veto:     1       1       0
 
-
+CaLib-TAPS-Time-Cut: -2.5 2.5
+CaLib-TAPS-Time-Cut-MaxRing: 4
 #
 # TA2MyCaLib calibration configuration
 #
@@ -69,7 +70,7 @@ CaLib-Veto-Time: 1
 
 # CB quadratic energy correction
 #              on/off  pi0_min  pi0_max  eta_min  eta_max
-CaLib-CB-Quad: 1       100      150      480      620
+#CaLib-CB-Quad: 1       100      150      480      620
 
 # tagger time calibration
 CaLib-Tagger-Time: 1
@@ -103,17 +104,11 @@ CaLib-TAPS-Energy: 1
 # TAPS PSA calibration
 #CaLib-TAPS-PSA: 1
 
-
-
 # PID energy calibration
 #CaLib-PID-Energy: 1
 
-
-
-
 # Veto energy
 #CaLib-Veto-Energy: 1
-
 
 
 Initialise:
