@@ -1013,6 +1013,21 @@ Moliere-Radius: 2.2 365 376
 ## Shower Depth Correction
 ShowerDepthCorrection: 1.2
 
+## Ignore Elements, no visible pi0 peak (drowns in background)
+Ignore-Elem: 2
+Ignore-Elem: 73
+Ignore-Elem: 127
+Ignore-Elem: 137
+Ignore-Elem: 138 
+Ignore-Elem: 145 
+Ignore-Elem: 200 
+Ignore-Elem: 218 
+Ignore-Elem: 283 
+Ignore-Elem: 291 
+Ignore-Elem: 356 
+Ignore-Elem: 357 
+Ignore-Elem: 364
+
 ########################################################################
 ## Post initialization
 ########################################################################
