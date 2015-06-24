@@ -29,10 +29,10 @@ Multi-hit: 8
 ########################################################################
 ##
 ## Energy given by c1 * (E/GeV)^c2 (enable/disable by last parameter).
-Energy-Resolution: 0.027  0.750  1
+Energy-Resolution: 0.027  0.750  0
 ##
 ## Time given by Gaussian with sigma in ns (enable/disable by last parameter).
-Time-Resolution:   2.870  1
+Time-Resolution:   2.870  0
 ##
 ## Theta and phi resolutions (deg) to be reported by TA2Particles from CB.
 Theta-Resolution:  2.5
