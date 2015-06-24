@@ -1500,6 +1500,9 @@ TimeWalk: 719   0   0   0   0
 ##
 #Max-Cluster:            8	25
 Max-Cluster:            32	15
+## Use the NextGen algorithm
+Cluster-Algorithm: NextGen
+# Cluster-Algorithm: Trad
 ##
 ########################################################################
 ## Nearest neighbours for each element of array
